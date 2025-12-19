@@ -7,6 +7,7 @@
 
 // Forward declarations
 @class YTWatchViewController;
+@class YTMainAppVideoPlayerOverlayView;
 
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
@@ -142,6 +143,100 @@ static void hookClass(NSObject *instance) {
         return orientations;
     }
     return %orig;
+}
+%end
+
+// Virtual bezel in landscape mode to prevent accidental video scrubbing
+%hook YTMainAppVideoPlayerOverlayView
+- (void)layoutSubviews {
+    %orig;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"virtualBezel_enabled"]) {
+        // Remove blocking views if feature is disabled
+        UIView *view = (UIView *)self;
+        UIView *leftBlocker = [view viewWithTag:999998];
+        UIView *rightBlocker = [view viewWithTag:999999];
+        if (leftBlocker) [leftBlocker removeFromSuperview];
+        if (rightBlocker) [rightBlocker removeFromSuperview];
+        return;
+    }
+    
+    // Check if we're in landscape orientation
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    BOOL isLandscape = UIInterfaceOrientationIsLandscape(orientation);
+    
+    if (!isLandscape) {
+        // Remove blocking views if they exist when not in landscape
+        UIView *view = (UIView *)self;
+        UIView *leftBlocker = [view viewWithTag:999998];
+        UIView *rightBlocker = [view viewWithTag:999999];
+        if (leftBlocker) [leftBlocker removeFromSuperview];
+        if (rightBlocker) [rightBlocker removeFromSuperview];
+        return;
+    }
+    
+    // Get screen dimensions
+    UIView *view = (UIView *)self;
+    CGRect screenBounds = view.bounds;
+    CGFloat screenWidth = screenBounds.size.width;
+    CGFloat screenHeight = screenBounds.size.height;
+    
+    // Calculate 16:9 aspect ratio region centered on screen
+    CGFloat aspectRatio = 16.0 / 9.0;
+    CGFloat videoWidth, videoHeight;
+    
+    if (screenWidth / screenHeight > aspectRatio) {
+        // Screen is wider than 16:9, so video height matches screen height
+        videoHeight = screenHeight;
+        videoWidth = videoHeight * aspectRatio;
+    } else {
+        // Screen is taller than 16:9, so video width matches screen width
+        videoWidth = screenWidth;
+        videoHeight = videoWidth / aspectRatio;
+    }
+    
+    // Center the video region
+    CGFloat videoX = (screenWidth - videoWidth) / 2.0;
+    
+    // Only create blocking views if there's space on the sides
+    if (videoX > 0) {
+        // Create or update left blocking view
+        UIView *leftBlocker = [view viewWithTag:999998];
+        if (!leftBlocker) {
+            leftBlocker = [[UIView alloc] init];
+            leftBlocker.tag = 999998;
+            leftBlocker.backgroundColor = [UIColor clearColor];
+            leftBlocker.userInteractionEnabled = YES;
+            leftBlocker.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+            [view addSubview:leftBlocker];
+        }
+        leftBlocker.frame = CGRectMake(0, 0, videoX, screenHeight);
+    } else {
+        // Remove left blocker if no space
+        UIView *leftBlocker = [view viewWithTag:999998];
+        if (leftBlocker) [leftBlocker removeFromSuperview];
+    }
+    
+    CGFloat rightBlockerX = videoX + videoWidth;
+    CGFloat rightBlockerWidth = screenWidth - rightBlockerX;
+    if (rightBlockerWidth > 0) {
+        // Create or update right blocking view
+        UIView *rightBlocker = [view viewWithTag:999999];
+        if (!rightBlocker) {
+            rightBlocker = [[UIView alloc] init];
+            rightBlocker.tag = 999999;
+            rightBlocker.backgroundColor = [UIColor clearColor];
+            rightBlocker.userInteractionEnabled = YES;
+            rightBlocker.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+            [view addSubview:rightBlocker];
+        }
+        rightBlocker.frame = CGRectMake(rightBlockerX, 0, rightBlockerWidth, screenHeight);
+    } else {
+        // Remove right blocker if no space
+        UIView *rightBlocker = [view viewWithTag:999999];
+        if (rightBlocker) [rightBlocker removeFromSuperview];
+    }
 }
 %end
 

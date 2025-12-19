@@ -206,6 +206,19 @@ NSBundle *YTWKSBundle() {
         settingItemId:2];
     [sectionItems addObject:disableFloatingMiniplayer];
 
+    // Virtual bezel in landscape
+    YTSettingsSectionItem *virtualBezel = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"VIRTUAL_BEZEL")
+        titleDescription:LOC(@"VIRTUAL_BEZEL_DESC")
+        accessibilityIdentifier:nil
+        switchOn:[defaults boolForKey:@"virtualBezel_enabled"]
+        switchBlock:^BOOL (YTSettingsCell *cell, BOOL enabled) {
+            [defaults setBool:enabled forKey:@"virtualBezel_enabled"];
+            [defaults synchronize];
+            return YES;
+        }
+        settingItemId:3];
+    [sectionItems addObject:virtualBezel];
+
     YTSettingsViewController *delegate = [self valueForKey:@"_dataDelegate"];
     NSString *title = @"YTweaks";
     if ([delegate respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)]) {
@@ -245,7 +258,8 @@ NSBundle *YTWKSBundle() {
     for (NSString *key in prefs) {
         if ([key hasPrefix:@"fullscreenToTheRight"] || 
             [key hasPrefix:@"fullscreenToTheLeft"] || 
-            [key hasPrefix:@"enable"]) {
+            [key hasPrefix:@"enable"] ||
+            [key hasPrefix:@"virtualBezel"]) {
             ytweaksPrefs[key] = prefs[key];
         }
     }
@@ -313,7 +327,8 @@ NSBundle *YTWKSBundle() {
 - (void)restoreDefaults {
     NSArray *keys = @[@"fullscreenToTheRight_enabled", 
                       @"fullscreenToTheLeft_enabled", 
-                      @"enableIosFloatingMiniplayer"];
+                      @"enableIosFloatingMiniplayer",
+                      @"virtualBezel_enabled"];
     
     for (NSString *key in keys) {
         [defaults removeObjectForKey:key];
