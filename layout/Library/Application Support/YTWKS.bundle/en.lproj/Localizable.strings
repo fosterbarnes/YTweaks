@@ -16,7 +16,7 @@
 
 // Virtual Bezel
 "VIRTUAL_BEZEL" = "Virtual fullscreen bezels";
-"VIRTUAL_BEZEL_DESC" = Adds invisible touch-safe zones on black bars to prevent accidental taps and skips. Meant for iPhones with no home button.";
+"VIRTUAL_BEZEL_DESC" = "Adds invisible touch-safe zones on black bars to prevent accidental taps and skips. Meant for iPhones with no home button.";
 
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Preferences management";
