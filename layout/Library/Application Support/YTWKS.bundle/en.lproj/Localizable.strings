@@ -18,6 +18,10 @@
 "VIRTUAL_BEZEL" = "Virtual fullscreen bezels";
 "VIRTUAL_BEZEL_DESC" = "Adds invisible touch-safe zones on black bars to prevent accidental taps and skips. Meant for iPhones with no home button.";
 
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Hide AI Summaries";
+"HIDE_AI_SUMMARIES_DESC" = "Hides AI-generated summary buttons that appear below videos in the feed.";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Preferences management";
 "IMPORT_PREFERENCES" = "Import preferences";

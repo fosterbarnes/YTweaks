@@ -219,6 +219,19 @@ NSBundle *YTWKSBundle() {
         settingItemId:3];
     [sectionItems addObject:virtualBezel];
 
+    // Hide AI Summaries
+    YTSettingsSectionItem *hideAISummaries = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"HIDE_AI_SUMMARIES")
+        titleDescription:LOC(@"HIDE_AI_SUMMARIES_DESC")
+        accessibilityIdentifier:nil
+        switchOn:[defaults boolForKey:@"hideAISummaries_enabled"]
+        switchBlock:^BOOL (YTSettingsCell *cell, BOOL enabled) {
+            [defaults setBool:enabled forKey:@"hideAISummaries_enabled"];
+            [defaults synchronize];
+            return YES;
+        }
+        settingItemId:4];
+    [sectionItems addObject:hideAISummaries];
+
     YTSettingsViewController *delegate = [self valueForKey:@"_dataDelegate"];
     NSString *title = @"YTweaks";
     if ([delegate respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)]) {
@@ -259,7 +272,8 @@ NSBundle *YTWKSBundle() {
         if ([key hasPrefix:@"fullscreenToTheRight"] || 
             [key hasPrefix:@"fullscreenToTheLeft"] || 
             [key hasPrefix:@"enable"] ||
-            [key hasPrefix:@"virtualBezel"]) {
+            [key hasPrefix:@"virtualBezel"] ||
+            [key hasPrefix:@"hideAISummaries"]) {
             ytweaksPrefs[key] = prefs[key];
         }
     }
@@ -328,7 +342,8 @@ NSBundle *YTWKSBundle() {
     NSArray *keys = @[@"fullscreenToTheRight_enabled", 
                       @"fullscreenToTheLeft_enabled", 
                       @"enableIosFloatingMiniplayer",
-                      @"virtualBezel_enabled"];
+                      @"virtualBezel_enabled",
+                      @"hideAISummaries_enabled"];
     
     for (NSString *key in keys) {
         [defaults removeObjectForKey:key];

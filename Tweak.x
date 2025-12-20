@@ -240,6 +240,32 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
+// Hide AI Summaries
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
+        return %orig;
+    }
+    
+    NSString *description = [self description];
+    
+    // Check for various summary-related identifiers
+    // Common patterns: summary, ai_summary, video_summary, etc.
+    NSArray *summaryPatterns = @[@"summary", @"ai_summary", @"video_summary", @"summary_button", 
+                                  @"summary_card", @"summary_renderer", @"summary_element"];
+    
+    for (NSString *pattern in summaryPatterns) {
+        if ([description rangeOfString:pattern options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            // Return empty data to hide the element
+            return [NSData data];
+        }
+    }
+    
+    return %orig;
+}
+%end
+
 %ctor {
     [[NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/Frameworks/Module_Framework.framework", [[NSBundle mainBundle] bundlePath]]] load];
     
