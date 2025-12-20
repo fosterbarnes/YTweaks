@@ -241,29 +241,68 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
-// Hide AI Summaries
-%hook YTIElementRenderer
-- (NSData *)elementData {
+// Hide AI Summaries - View-based approach to avoid breaking feed layout
+static void hideSummaryViewsInView(UIView *view) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return %orig;
+        return;
     }
     
-    NSString *description = [self description];
-    
-    // Check for various summary-related identifiers
-    // Common patterns: summary, ai_summary, video_summary, etc.
-    NSArray *summaryPatterns = @[@"summary", @"ai_summary", @"video_summary", @"summary_button", 
-                                  @"summary_card", @"summary_renderer", @"summary_element"];
-    
-    for (NSString *pattern in summaryPatterns) {
-        if ([description rangeOfString:pattern options:NSCaseInsensitiveSearch].location != NSNotFound) {
-            // Return empty data to hide the element
-            return [NSData data];
+    // Search for labels containing "Summary" text
+    for (UIView *subview in view.subviews) {
+        if ([subview isKindOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *)subview;
+            if (label.text && [label.text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                // Found "Summary" label - hide its parent container (the summary button/card)
+                UIView *container = label.superview;
+                int levelsUp = 0;
+                // Go up a few levels to find the actual button/card container
+                while (container && container != view && levelsUp < 5) {
+                    // Check if this looks like a button or interactive element
+                    if ([container isKindOfClass:[UIButton class]] || 
+                        container.backgroundColor || 
+                        container.layer.cornerRadius > 0 ||
+                        container.frame.size.height > 30) { // Likely the summary card/button
+                        container.hidden = YES;
+                        // Collapse the view by setting height to 0
+                        CGRect frame = container.frame;
+                        frame.size.height = 0;
+                        container.frame = frame;
+                        break;
+                    }
+                    container = container.superview;
+                    levelsUp++;
+                }
+                // If we didn't find a specific container, just hide the label's immediate parent
+                if (levelsUp >= 5 && label.superview) {
+                    label.superview.hidden = YES;
+                    CGRect frame = label.superview.frame;
+                    frame.size.height = 0;
+                    label.superview.frame = frame;
+                }
+            }
+        }
+        
+        // Check accessibility label
+        if (subview.accessibilityLabel && [subview.accessibilityLabel rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+            subview.hidden = YES;
+            CGRect frame = subview.frame;
+            frame.size.height = 0;
+            subview.frame = frame;
+        }
+        
+        // Recursively check subviews (limit depth to avoid performance issues)
+        if (subview.subviews.count > 0 && subview.subviews.count < 50) {
+            hideSummaryViewsInView(subview);
         }
     }
-    
-    return %orig;
+}
+
+// Hook collection view cells to hide summary views after layout
+%hook UICollectionViewCell
+- (void)layoutSubviews {
+    %orig;
+    hideSummaryViewsInView(self);
 }
 %end
 
