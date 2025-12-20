@@ -4,6 +4,7 @@
 #import <YouTubeHeader/YTGlobalConfig.h>
 #import <YouTubeHeader/YTColdConfig.h>
 #import <YouTubeHeader/YTHotConfig.h>
+#import <YouTubeHeader/YTIElementRenderer.h>
 
 // Forward declarations
 @class YTWatchViewController;
