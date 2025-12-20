@@ -241,54 +241,121 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
-// Hide AI Summaries - View-based approach to avoid breaking feed layout
+// Hide AI Summaries - Look for sparkle/star icon (✨) and Summary text
+static BOOL containsSparkleOrSummary(UIView *view) {
+    // Check if view contains sparkle character or "Summary" text
+    if ([view isKindOfClass:[UILabel class]]) {
+        UILabel *label = (UILabel *)view;
+        if (label.text) {
+            // Check for sparkle character (✨) or "Summary" text
+            NSString *text = label.text;
+            if ([text containsString:@"✨"] || 
+                [text containsString:@"✧"] ||
+                [text containsString:@"✦"] ||
+                [text containsString:@" sparkle"] ||
+                [text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                return YES;
+            }
+        }
+    }
+    
+    // Check UIImageView for sparkle icon
+    if ([view isKindOfClass:[UIImageView class]]) {
+        UIImageView *imageView = (UIImageView *)view;
+        // Check image description
+        NSString *imageDesc = [imageView.image description];
+        if (imageDesc && ([imageDesc containsString:@"sparkle"] || 
+                          [imageDesc containsString:@"star"] ||
+                          [imageDesc containsString:@"magic"] ||
+                          [imageDesc containsString:@"wand"])) {
+            return YES;
+        }
+        // Also check if it's a small icon (sparkle icons are typically small)
+        if (imageView.frame.size.width < 30 && imageView.frame.size.height < 30 && imageView.image) {
+            // Could be a sparkle icon - check if nearby views have "Summary"
+            UIView *parent = imageView.superview;
+            if (parent) {
+                for (UIView *sibling in parent.subviews) {
+                    if ([sibling isKindOfClass:[UILabel class]]) {
+                        UILabel *siblingLabel = (UILabel *)sibling;
+                        if (siblingLabel.text && [siblingLabel.text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                            return YES;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Check accessibility label
+    if (view.accessibilityLabel) {
+        NSString *accLabel = view.accessibilityLabel;
+        if ([accLabel containsString:@"✨"] ||
+            [accLabel containsString:@"✧"] ||
+            [accLabel containsString:@"✦"] ||
+            [accLabel rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound ||
+            [accLabel containsString:@"sparkle"]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 static void hideSummaryViewsInView(UIView *view) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
         return;
     }
     
-    // Search for labels containing "Summary" text
+    // Search for views containing sparkle icon or "Summary" text
     for (UIView *subview in view.subviews) {
-        if ([subview isKindOfClass:[UILabel class]]) {
-            UILabel *label = (UILabel *)subview;
-            if (label.text && [label.text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                // Found "Summary" label - hide its parent container (the summary button/card)
-                UIView *container = label.superview;
-                int levelsUp = 0;
-                // Go up a few levels to find the actual button/card container
-                while (container && container != view && levelsUp < 5) {
-                    // Check if this looks like a button or interactive element
-                    if ([container isKindOfClass:[UIButton class]] || 
-                        container.backgroundColor || 
-                        container.layer.cornerRadius > 0 ||
-                        container.frame.size.height > 30) { // Likely the summary card/button
-                        container.hidden = YES;
-                        // Collapse the view by setting height to 0
-                        CGRect frame = container.frame;
-                        frame.size.height = 0;
-                        container.frame = frame;
-                        break;
-                    }
-                    container = container.superview;
-                    levelsUp++;
-                }
-                // If we didn't find a specific container, just hide the label's immediate parent
-                if (levelsUp >= 5 && label.superview) {
-                    label.superview.hidden = YES;
-                    CGRect frame = label.superview.frame;
+        if (containsSparkleOrSummary(subview)) {
+            // Found sparkle icon or Summary text - hide the parent container
+            UIView *container = subview.superview;
+            int levelsUp = 0;
+            // Go up to find the actual button/card container
+            while (container && container != view && levelsUp < 6) {
+                // Check if this looks like a button or card container
+                if ([container isKindOfClass:[UIButton class]] || 
+                    container.backgroundColor || 
+                    container.layer.cornerRadius > 0 ||
+                    container.frame.size.height > 25) { // Likely the summary card/button
+                    container.hidden = YES;
+                    // Collapse the view by setting height to 0
+                    CGRect frame = container.frame;
                     frame.size.height = 0;
-                    label.superview.frame = frame;
+                    container.frame = frame;
+                    break;
                 }
+                container = container.superview;
+                levelsUp++;
+            }
+            // Fallback: hide immediate parent if we didn't find a specific container
+            if (levelsUp >= 6 && subview.superview) {
+                subview.superview.hidden = YES;
+                CGRect frame = subview.superview.frame;
+                frame.size.height = 0;
+                subview.superview.frame = frame;
             }
         }
         
-        // Check accessibility label
-        if (subview.accessibilityLabel && [subview.accessibilityLabel rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-            subview.hidden = YES;
-            CGRect frame = subview.frame;
-            frame.size.height = 0;
-            subview.frame = frame;
+        // Also check if this view itself should be hidden
+        if (containsSparkleOrSummary(subview)) {
+            // Check siblings for "Summary" text if we found a sparkle icon
+            UIView *parent = subview.superview;
+            if (parent) {
+                for (UIView *sibling in parent.subviews) {
+                    if (sibling != subview && containsSparkleOrSummary(sibling)) {
+                        // Found both sparkle and summary in same container - hide it
+                        parent.hidden = YES;
+                        CGRect frame = parent.frame;
+                        frame.size.height = 0;
+                        parent.frame = frame;
+                        break;
+                    }
+                }
+            }
         }
         
         // Recursively check subviews (limit depth to avoid performance issues)
