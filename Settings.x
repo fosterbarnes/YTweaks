@@ -415,14 +415,14 @@ NSBundle *YTWKSBundle() {
             titleLabel.font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightSemibold];
         }
         
-        // Style version footer (smaller, not bold)
+        // Style version footer (smaller, lighter)
         NSString *versionPrefix = @"YTweaks ";
         if (titleLabel && [titleLabel.text hasPrefix:versionPrefix]) {
             // Disable user interaction
             self.userInteractionEnabled = NO;
             
-            // Make text smaller, regular weight (not bold)
-            titleLabel.font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightRegular];
+            // Make text smaller, light weight
+            titleLabel.font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightLight];
         }
     } @catch (NSException *e) {
         // Couldn't access properties
