@@ -232,6 +232,23 @@ NSBundle *YTWKSBundle() {
         settingItemId:4];
     [sectionItems addObject:hideAISummaries];
 
+    // Version number footer (at the bottom)
+    // TWEAK_VERSION is defined via compiler flag -DTWEAK_VERSION=$(PACKAGE_VERSION)
+    #ifndef TWEAK_VERSION
+    #define TWEAK_VERSION 0.3.0
+    #endif
+    #define STRINGIFY(x) #x
+    #define TOSTRING(x) STRINGIFY(x)
+    NSString *versionString = [NSString stringWithFormat:@"YTweaks %s", TOSTRING(TWEAK_VERSION)];
+    YTSettingsSectionItem *versionFooter = [YTSettingsSectionItemClass itemWithTitle:versionString
+        titleDescription:nil
+        accessibilityIdentifier:nil
+        detailTextBlock:nil
+        selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+            return NO; // Non-interactive footer
+        }];
+    [sectionItems addObject:versionFooter];
+
     YTSettingsViewController *delegate = [self valueForKey:@"_dataDelegate"];
     NSString *title = @"YTweaks";
     if ([delegate respondsToSelector:@selector(setSectionItems:forCategory:title:icon:titleDescription:headerHidden:)]) {
@@ -396,6 +413,16 @@ NSBundle *YTWKSBundle() {
             
             // Make text smaller
             titleLabel.font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightSemibold];
+        }
+        
+        // Style version footer (smaller, not bold)
+        NSString *versionPrefix = @"YTweaks ";
+        if (titleLabel && [titleLabel.text hasPrefix:versionPrefix]) {
+            // Disable user interaction
+            self.userInteractionEnabled = NO;
+            
+            // Make text smaller, regular weight (not bold)
+            titleLabel.font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightRegular];
         }
     } @catch (NSException *e) {
         // Couldn't access properties
