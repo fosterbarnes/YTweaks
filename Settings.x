@@ -239,7 +239,7 @@ NSBundle *YTWKSBundle() {
     #endif
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
-    NSString *versionString = [NSString stringWithFormat:@"YTweaks %s", TOSTRING(TWEAK_VERSION)];
+    NSString *versionString = [NSString stringWithFormat:@"YTweaks v%s", TOSTRING(TWEAK_VERSION)];
     YTSettingsSectionItem *versionFooter = [YTSettingsSectionItemClass itemWithTitle:versionString
         titleDescription:nil
         accessibilityIdentifier:nil
