@@ -11,6 +11,13 @@
 @class YTMainAppVideoPlayerOverlayView;
 @class YTAsyncCollectionView;
 @class _ASCollectionViewCell;
+@class ASNodeController;
+@class ELMNodeController;
+@class ELMComponent;
+@class ASDisplayNode;
+@class ASCollectionElement;
+@class ASCellNode;
+@class ASCollectionView;
 
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
@@ -257,7 +264,7 @@ static void hookClass(NSObject *instance) {
     NSString *description = [self description];
     
     // Check for AI summary related strings in element description
-    // Common patterns: summary, gemini, ai_summary, video_summary, etc.
+    // Expanded patterns based on common YouTube element naming
     NSArray *summaryPatterns = @[
         @"summary.eml",
         @"ai_summary",
@@ -265,7 +272,13 @@ static void hookClass(NSObject *instance) {
         @"gemini",
         @"summary_button",
         @"summary_card",
-        @"summary_shelf"
+        @"summary_shelf",
+        @"video_summary_card",
+        @"gemini_summary",
+        @"summary_card.eml",
+        @"video_summary_button",
+        @"ai_summary_card",
+        @"gemini_button"
     ];
     
     for (NSString *pattern in summaryPatterns) {
@@ -279,9 +292,123 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
+// Hide AI Summaries using ASCollectionView sizeForElement hook
+%hook ASCollectionView
+- (CGSize)sizeForElement:(ASCollectionElement *)element {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
+        return %orig;
+    }
+    
+    // Get node and controller from element
+    if (![element respondsToSelector:@selector(node)]) {
+        return %orig;
+    }
+    
+    id node = [element performSelector:@selector(node)];
+    if (!node || ![node respondsToSelector:@selector(controller)]) {
+        return %orig;
+    }
+    
+    id nodeController = [node performSelector:@selector(controller)];
+    if (!nodeController) {
+        return %orig;
+    }
+    
+    // Search for summary identifiers in node hierarchy
+    NSArray *summaryIdentifiers = @[
+        @"summary",
+        @"ai_summary",
+        @"video_summary",
+        @"gemini",
+        @"summary_button",
+        @"summary_card",
+        @"summary.eml",
+        @"video_summary_card",
+        @"gemini_summary"
+    ];
+    
+    if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
+        // Return zero size to prevent rendering
+        return CGSizeZero;
+    }
+    
+    return %orig;
+}
+%end
+
+// Recursive function to find summary elements in node hierarchy
+static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> *identifiers) {
+    if (!nodeController) return NO;
+    
+    // Check if nodeController has children method
+    if (![nodeController respondsToSelector:@selector(children)]) {
+        return NO;
+    }
+    
+    NSArray *children = [nodeController performSelector:@selector(children)];
+    if (!children) return NO;
+    
+    for (id child in children) {
+        // Check ELMNodeController children
+        Class ELMNodeControllerClass = objc_lookUpClass("ELMNodeController");
+        if (ELMNodeControllerClass && [child isKindOfClass:ELMNodeControllerClass]) {
+            if ([child respondsToSelector:@selector(children)]) {
+                NSArray *elmChildren = [child performSelector:@selector(children)];
+                if (elmChildren) {
+                    Class ELMComponentClass = objc_lookUpClass("ELMComponent");
+                    for (id elmChild in elmChildren) {
+                        if (ELMComponentClass && [elmChild isKindOfClass:ELMComponentClass]) {
+                            NSString *desc = [elmChild description];
+                            for (NSString *identifier in identifiers) {
+                                if (desc && [desc containsString:identifier]) {
+                                    return YES;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Check ASNodeController children
+        Class ASNodeControllerClass = objc_lookUpClass("ASNodeController");
+        if (ASNodeControllerClass && [child isKindOfClass:ASNodeControllerClass]) {
+            // Check yogaChildren for accessibility identifiers
+            if ([child respondsToSelector:@selector(node)]) {
+                id node = [child performSelector:@selector(node)];
+                Class ASDisplayNodeClass = objc_lookUpClass("ASDisplayNode");
+                if (ASDisplayNodeClass && [node isKindOfClass:ASDisplayNodeClass]) {
+                    if ([node respondsToSelector:@selector(yogaChildren)]) {
+                        NSArray *yogaChildren = [node performSelector:@selector(yogaChildren)];
+                        if (yogaChildren) {
+                            for (id displayNode in yogaChildren) {
+                                if ([displayNode respondsToSelector:@selector(accessibilityIdentifier)]) {
+                                    NSString *accId = [displayNode accessibilityIdentifier];
+                                    for (NSString *identifier in identifiers) {
+                                        if (accId && [accId containsString:identifier]) {
+                                            return YES;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Recursively search child
+            if (findSummaryInNodeController(child, identifiers)) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
 // Remove summary cells from collection view
-// Hook UICollectionView and check for YTAsyncCollectionView instances
-%hook UICollectionView
+%hook YTAsyncCollectionView
 - (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = %orig;
     
@@ -290,17 +417,13 @@ static void hookClass(NSObject *instance) {
         return cell;
     }
     
-    // Only process YTAsyncCollectionView instances (YouTube's feed collection view)
-    NSString *className = NSStringFromClass([self class]);
-    if (![className containsString:@"YTAsync"] && ![className containsString:@"Async"]) {
-        return cell;
-    }
-    
     // Check _ASCollectionViewCell for summary accessibility identifiers
     Class ASCollectionViewCellClass = objc_lookUpClass("_ASCollectionViewCell");
     if (ASCollectionViewCellClass && [cell isKindOfClass:ASCollectionViewCellClass]) {
         if ([cell respondsToSelector:@selector(node)]) {
             id node = [cell performSelector:@selector(node)];
+            
+            // Check top-level accessibility identifier
             if (node && [node respondsToSelector:@selector(accessibilityIdentifier)]) {
                 NSString *identifier = [node accessibilityIdentifier];
                 
@@ -311,23 +434,49 @@ static void hookClass(NSObject *instance) {
                     @"video_summary",
                     @"gemini",
                     @"summary_button",
-                    @"summary_card"
+                    @"summary_card",
+                    @"summary_shelf",
+                    @"video_summary_card",
+                    @"gemini_summary"
                 ];
                 
                 for (NSString *summaryId in summaryIdentifiers) {
                     if (identifier && [identifier containsString:summaryId]) {
-                        // Remove the cell by deleting it from the collection view
-                        if ([self respondsToSelector:@selector(deleteItemsAtIndexPaths:)]) {
-                            [self performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
-                        }
+                        [self removeCellsAtIndexPath:indexPath];
                         return cell;
                     }
+                }
+            }
+            
+            // Search deeper in node hierarchy
+            if (node && [node respondsToSelector:@selector(controller)]) {
+                id nodeController = [node performSelector:@selector(controller)];
+                NSArray *summaryIdentifiers = @[
+                    @"summary",
+                    @"ai_summary",
+                    @"video_summary",
+                    @"gemini",
+                    @"summary_button",
+                    @"summary_card",
+                    @"summary.eml",
+                    @"video_summary_card",
+                    @"gemini_summary"
+                ];
+                
+                if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
+                    [self removeCellsAtIndexPath:indexPath];
+                    return cell;
                 }
             }
         }
     }
     
     return cell;
+}
+
+%new
+- (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath {
+    [self deleteItemsAtIndexPaths:@[indexPath]];
 }
 %end
 
