@@ -438,9 +438,8 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
                 
                 for (NSString *summaryId in summaryIdentifiers) {
                     if (identifier && [identifier containsString:summaryId]) {
-                        if ([self respondsToSelector:@selector(removeCellsAtIndexPath:)]) {
-                            [self performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
-                        }
+                        id selfId = (id)self;
+                        [selfId performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
                         return cell;
                     }
                 }
@@ -462,9 +461,8 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
                 ];
                 
                 if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
-                    if ([self respondsToSelector:@selector(removeCellsAtIndexPath:)]) {
-                        [self performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
-                    }
+                    id selfId = (id)self;
+                    [selfId performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
                     return cell;
                 }
             }
@@ -476,9 +474,8 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
 
 %new(v)
 - (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self respondsToSelector:@selector(deleteItemsAtIndexPaths:)]) {
-        [self performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
-    }
+    id selfId = (id)self;
+    [selfId performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
 }
 %end
 
