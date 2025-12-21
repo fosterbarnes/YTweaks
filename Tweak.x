@@ -214,10 +214,8 @@ static void hookClass(NSObject *instance) {
             leftBlocker.userInteractionEnabled = YES;
             leftBlocker.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
             [view addSubview:leftBlocker];
-            [view sendSubviewToBack:leftBlocker];
         }
         leftBlocker.frame = CGRectMake(0, 0, clickableX, screenHeight);
-        [view sendSubviewToBack:leftBlocker];
     } else {
         // Remove left blocker if no space
         UIView *leftBlocker = [view viewWithTag:999998];
@@ -236,10 +234,8 @@ static void hookClass(NSObject *instance) {
             rightBlocker.userInteractionEnabled = YES;
             rightBlocker.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
             [view addSubview:rightBlocker];
-            [view sendSubviewToBack:rightBlocker];
         }
         rightBlocker.frame = CGRectMake(rightBlockerX, 0, rightBlockerWidth, screenHeight);
-        [view sendSubviewToBack:rightBlocker];
     } else {
         // Remove right blocker if no space
         UIView *rightBlocker = [view viewWithTag:999999];
