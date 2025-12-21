@@ -9,6 +9,8 @@
 // Forward declarations
 @class YTWatchViewController;
 @class YTMainAppVideoPlayerOverlayView;
+@class YTAsyncCollectionView;
+@class _ASCollectionViewCell;
 
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
@@ -244,7 +246,92 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
-// Hide AI Summaries - Look for sparkle/star icon (✨) and Summary text
+// Hide AI Summaries - Filter at element data level and remove cells
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
+        return %orig;
+    }
+    
+    NSString *description = [self description];
+    
+    // Check for AI summary related strings in element description
+    // Common patterns: summary, gemini, ai_summary, video_summary, etc.
+    NSArray *summaryPatterns = @[
+        @"summary.eml",
+        @"ai_summary",
+        @"video_summary",
+        @"gemini",
+        @"summary_button",
+        @"summary_card",
+        @"summary_shelf"
+    ];
+    
+    for (NSString *pattern in summaryPatterns) {
+        if ([description containsString:pattern]) {
+            // Return empty data to prevent rendering
+            return [NSData data];
+        }
+    }
+    
+    return %orig;
+}
+%end
+
+// Remove summary cells from collection view
+// Hook UICollectionView and check for YTAsyncCollectionView instances
+%hook UICollectionView
+- (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = %orig;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
+        return cell;
+    }
+    
+    // Only process YTAsyncCollectionView instances (YouTube's feed collection view)
+    NSString *className = NSStringFromClass([self class]);
+    if (![className containsString:@"YTAsync"] && ![className containsString:@"Async"]) {
+        return cell;
+    }
+    
+    // Check _ASCollectionViewCell for summary accessibility identifiers
+    Class ASCollectionViewCellClass = objc_lookUpClass("_ASCollectionViewCell");
+    if (ASCollectionViewCellClass && [cell isKindOfClass:ASCollectionViewCellClass]) {
+        if ([cell respondsToSelector:@selector(node)]) {
+            id node = [cell performSelector:@selector(node)];
+            if (node && [node respondsToSelector:@selector(accessibilityIdentifier)]) {
+                NSString *identifier = [node accessibilityIdentifier];
+                
+                // Check for summary-related identifiers
+                NSArray *summaryIdentifiers = @[
+                    @"summary",
+                    @"ai_summary",
+                    @"video_summary",
+                    @"gemini",
+                    @"summary_button",
+                    @"summary_card"
+                ];
+                
+                for (NSString *summaryId in summaryIdentifiers) {
+                    if (identifier && [identifier containsString:summaryId]) {
+                        // Remove the cell by deleting it from the collection view
+                        if ([self respondsToSelector:@selector(deleteItemsAtIndexPaths:)]) {
+                            [self performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
+                        }
+                        return cell;
+                    }
+                }
+            }
+        }
+    }
+    
+    return cell;
+}
+%end
+
+// Hide AI Summaries (Fallback) - Look for sparkle/star icon (✨) and Summary text in views
 static BOOL containsSparkleOrSummary(UIView *view) {
     // Check if view contains sparkle character or "Summary" text
     if ([view isKindOfClass:[UILabel class]]) {
@@ -297,7 +384,18 @@ static BOOL containsSparkleOrSummary(UIView *view) {
             [accLabel containsString:@"✧"] ||
             [accLabel containsString:@"✦"] ||
             [accLabel rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound ||
-            [accLabel containsString:@"sparkle"]) {
+            [accLabel containsString:@"sparkle"] ||
+            [accLabel containsString:@"gemini"]) {
+            return YES;
+        }
+    }
+    
+    // Check accessibility identifier
+    if (view.accessibilityIdentifier) {
+        NSString *accId = view.accessibilityIdentifier;
+        if ([accId rangeOfString:@"summary" options:NSCaseInsensitiveSearch].location != NSNotFound ||
+            [accId containsString:@"gemini"] ||
+            [accId containsString:@"ai_summary"]) {
             return YES;
         }
     }

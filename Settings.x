@@ -219,7 +219,7 @@ NSBundle *YTWKSBundle() {
         settingItemId:3];
     [sectionItems addObject:virtualBezel];
 
-    // Hide AI Summaries
+    // Hide AI Summaries (Experimental)
     YTSettingsSectionItem *hideAISummaries = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"HIDE_AI_SUMMARIES")
         titleDescription:LOC(@"HIDE_AI_SUMMARIES_DESC")
         accessibilityIdentifier:nil
