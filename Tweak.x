@@ -183,16 +183,16 @@ static void hookClass(NSObject *instance) {
     CGFloat screenWidth = screenBounds.size.width;
     CGFloat screenHeight = screenBounds.size.height;
     
-    // Calculate 16:9 aspect ratio region centered on screen
-    CGFloat aspectRatio = 16.0 / 9.0;
+    // Calculate 2177:1179 aspect ratio region centered on screen
+    CGFloat aspectRatio = 2177.0 / 1179.0;
     CGFloat videoWidth, videoHeight;
     
     if (screenWidth / screenHeight > aspectRatio) {
-        // Screen is wider than 16:9, so video height matches screen height
+        // Screen is wider than 2177:1179, so video height matches screen height
         videoHeight = screenHeight;
         videoWidth = videoHeight * aspectRatio;
     } else {
-        // Screen is taller than 16:9, so video width matches screen width
+        // Screen is taller than 2177:1179, so video width matches screen width
         videoWidth = screenWidth;
         videoHeight = videoWidth / aspectRatio;
     }
