@@ -183,25 +183,28 @@ static void hookClass(NSObject *instance) {
     CGFloat screenWidth = screenBounds.size.width;
     CGFloat screenHeight = screenBounds.size.height;
     
-    // Calculate 2177:1179 aspect ratio region centered on screen
-    CGFloat aspectRatio = 2177.0 / 1179.0;
-    CGFloat videoWidth, videoHeight;
+    // Calculate 2177:1179 aspect ratio for clickable area (touchable region)
+    // This ratio extends the clickable area just enough to reach the settings button
+    CGFloat clickableAspectRatio = 2177.0 / 1179.0;
+    CGFloat clickableWidth, clickableHeight;
     
-    if (screenWidth / screenHeight > aspectRatio) {
-        // Screen is wider than 2177:1179, so video height matches screen height
-        videoHeight = screenHeight;
-        videoWidth = videoHeight * aspectRatio;
+    // Calculate clickable area based on aspect ratio
+    // In landscape, we want the clickable area to match the aspect ratio
+    if (screenWidth / screenHeight > clickableAspectRatio) {
+        // Screen is wider than 2177:1179, so clickable height matches screen height
+        clickableHeight = screenHeight;
+        clickableWidth = clickableHeight * clickableAspectRatio;
     } else {
-        // Screen is taller than 2177:1179, so video width matches screen width
-        videoWidth = screenWidth;
-        videoHeight = videoWidth / aspectRatio;
+        // Screen is taller than 2177:1179, so clickable width matches screen width
+        clickableWidth = screenWidth;
+        clickableHeight = clickableWidth / clickableAspectRatio;
     }
     
-    // Center the video region
-    CGFloat videoX = (screenWidth - videoWidth) / 2.0;
+    // Center the clickable region
+    CGFloat clickableX = (screenWidth - clickableWidth) / 2.0;
     
     // Only create blocking views if there's space on the sides
-    if (videoX > 0) {
+    if (clickableX > 0) {
         // Create or update left blocking view
         UIView *leftBlocker = [view viewWithTag:999998];
         if (!leftBlocker) {
@@ -211,15 +214,17 @@ static void hookClass(NSObject *instance) {
             leftBlocker.userInteractionEnabled = YES;
             leftBlocker.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
             [view addSubview:leftBlocker];
+            [view sendSubviewToBack:leftBlocker];
         }
-        leftBlocker.frame = CGRectMake(0, 0, videoX, screenHeight);
+        leftBlocker.frame = CGRectMake(0, 0, clickableX, screenHeight);
+        [view sendSubviewToBack:leftBlocker];
     } else {
         // Remove left blocker if no space
         UIView *leftBlocker = [view viewWithTag:999998];
         if (leftBlocker) [leftBlocker removeFromSuperview];
     }
     
-    CGFloat rightBlockerX = videoX + videoWidth;
+    CGFloat rightBlockerX = clickableX + clickableWidth;
     CGFloat rightBlockerWidth = screenWidth - rightBlockerX;
     if (rightBlockerWidth > 0) {
         // Create or update right blocking view
@@ -231,8 +236,10 @@ static void hookClass(NSObject *instance) {
             rightBlocker.userInteractionEnabled = YES;
             rightBlocker.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
             [view addSubview:rightBlocker];
+            [view sendSubviewToBack:rightBlocker];
         }
         rightBlocker.frame = CGRectMake(rightBlockerX, 0, rightBlockerWidth, screenHeight);
+        [view sendSubviewToBack:rightBlocker];
     } else {
         // Remove right blocker if no space
         UIView *rightBlocker = [view viewWithTag:999999];
