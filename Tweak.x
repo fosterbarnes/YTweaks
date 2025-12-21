@@ -11,16 +11,12 @@
 @class YTMainAppVideoPlayerOverlayView;
 @class YTAsyncCollectionView;
 @class _ASCollectionViewCell;
-@class ASNodeController;
-@class ELMNodeController;
-@class ELMComponent;
-@class ASDisplayNode;
-@class ASCollectionElement;
-@class ASCellNode;
-@class ASCollectionView;
 
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
+
+// Forward declaration for recursive summary finder
+static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> *identifiers);
 
 // Helper function to get original value from config instance
 static BOOL getValueFromInvocation(id target, SEL selector) {
@@ -292,51 +288,6 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
-// Hide AI Summaries using ASCollectionView sizeForElement hook
-%hook ASCollectionView
-- (CGSize)sizeForElement:(ASCollectionElement *)element {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return %orig;
-    }
-    
-    // Get node and controller from element
-    if (![element respondsToSelector:@selector(node)]) {
-        return %orig;
-    }
-    
-    id node = [element performSelector:@selector(node)];
-    if (!node || ![node respondsToSelector:@selector(controller)]) {
-        return %orig;
-    }
-    
-    id nodeController = [node performSelector:@selector(controller)];
-    if (!nodeController) {
-        return %orig;
-    }
-    
-    // Search for summary identifiers in node hierarchy
-    NSArray *summaryIdentifiers = @[
-        @"summary",
-        @"ai_summary",
-        @"video_summary",
-        @"gemini",
-        @"summary_button",
-        @"summary_card",
-        @"summary.eml",
-        @"video_summary_card",
-        @"gemini_summary"
-    ];
-    
-    if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
-        // Return zero size to prevent rendering
-        return CGSizeZero;
-    }
-    
-    return %orig;
-}
-%end
-
 // Recursive function to find summary elements in node hierarchy
 static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> *identifiers) {
     if (!nodeController) return NO;
@@ -407,6 +358,51 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
     return NO;
 }
 
+// Hide AI Summaries using ASCollectionView sizeForElement hook
+%hook ASCollectionView
+- (CGSize)sizeForElement:(id)element {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
+        return %orig;
+    }
+    
+    // Get node and controller from element
+    if (!element || ![element respondsToSelector:@selector(node)]) {
+        return %orig;
+    }
+    
+    id node = [element performSelector:@selector(node)];
+    if (!node || ![node respondsToSelector:@selector(controller)]) {
+        return %orig;
+    }
+    
+    id nodeController = [node performSelector:@selector(controller)];
+    if (!nodeController) {
+        return %orig;
+    }
+    
+    // Search for summary identifiers in node hierarchy
+    NSArray *summaryIdentifiers = @[
+        @"summary",
+        @"ai_summary",
+        @"video_summary",
+        @"gemini",
+        @"summary_button",
+        @"summary_card",
+        @"summary.eml",
+        @"video_summary_card",
+        @"gemini_summary"
+    ];
+    
+    if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
+        // Return zero size to prevent rendering
+        return CGSizeZero;
+    }
+    
+    return %orig;
+}
+%end
+
 // Remove summary cells from collection view
 %hook YTAsyncCollectionView
 - (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -442,7 +438,9 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
                 
                 for (NSString *summaryId in summaryIdentifiers) {
                     if (identifier && [identifier containsString:summaryId]) {
-                        [self removeCellsAtIndexPath:indexPath];
+                        if ([self respondsToSelector:@selector(removeCellsAtIndexPath:)]) {
+                            [self performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
+                        }
                         return cell;
                     }
                 }
@@ -464,7 +462,9 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
                 ];
                 
                 if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
-                    [self removeCellsAtIndexPath:indexPath];
+                    if ([self respondsToSelector:@selector(removeCellsAtIndexPath:)]) {
+                        [self performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
+                    }
                     return cell;
                 }
             }
@@ -474,9 +474,11 @@ static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> 
     return cell;
 }
 
-%new
+%new(v)
 - (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath {
-    [self deleteItemsAtIndexPaths:@[indexPath]];
+    if ([self respondsToSelector:@selector(deleteItemsAtIndexPaths:)]) {
+        [self performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
+    }
 }
 %end
 
