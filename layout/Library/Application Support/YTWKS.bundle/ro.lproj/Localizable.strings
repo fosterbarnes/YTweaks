@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Dezactivare miniplayer flotant";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "Dezactivează miniplayer-ul flotant. Restabilește bara de jos.";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "Borduri virtuale ecran complet";
+"VIRTUAL_BEZEL_DESC" = "Adaugă zone de atingere sigure invizibile pe barele negre pentru a preveni atingerile și săriturile accidentale. Destinat pentru iPhone-uri fără buton de acasă.";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "Ascunde Rezumatul AI (Experimental)";
+"HIDE_AI_SUMMARIES_DESC" = "Ascunde butoanele de rezumat generate de AI care apar sub videoclipuri în feed. Funcție experimentală.";
+
+// Fix Casting
+"FIX_CASTING" = "Repară Casting";
+"FIX_CASTING_DESC" = "Încearcă să repare castingul prin modificarea unor parametri A/B. Funcționează doar pe v20.10.4 sau mai mic";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Gestionarea preferințelor";
 "IMPORT_PREFERENCES" = "Importă preferințe";

@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Tắt trình phát nhỏ nổi";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "Tắt trình phát nhỏ nổi. Khôi phục thanh ở dưới cùng.";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "Viền toàn màn hình ảo";
+"VIRTUAL_BEZEL_DESC" = "Thêm các vùng chạm an toàn vô hình trên các thanh đen để ngăn chặn các lần chạm và bỏ qua không mong muốn. Dành cho iPhone không có nút trang chủ.";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "Ẩn Tóm tắt AI (Thử nghiệm)";
+"HIDE_AI_SUMMARIES_DESC" = "Ẩn các nút tóm tắt do AI tạo xuất hiện bên dưới video trong nguồn cấp dữ liệu. Tính năng thử nghiệm.";
+
+// Fix Casting
+"FIX_CASTING" = "Sửa truyền";
+"FIX_CASTING_DESC" = "Cố gắng sửa truyền bằng cách thay đổi một số cờ A/B. Chỉ hoạt động trên v20.10.4 trở xuống";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Quản lý tùy chọn";
 "IMPORT_PREFERENCES" = "Nhập tùy chọn";

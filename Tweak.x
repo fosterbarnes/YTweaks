@@ -622,6 +622,41 @@ static void hideSummaryViewsInView(UIView *view) {
 }
 %end
 
+// Fix Casting: https://github.com/arichornlover/uYouEnhanced/issues/606#issuecomment-2098289942
+%hook YTColdConfig
+- (BOOL)cxClientEnableIosLocalNetworkPermissionReliabilityFixes {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"fixCasting_enabled"]) {
+        return YES;
+    }
+    return %orig;
+}
+- (BOOL)cxClientEnableIosLocalNetworkPermissionUsingSockets {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"fixCasting_enabled"]) {
+        return NO;
+    }
+    return %orig;
+}
+- (BOOL)cxClientEnableIosLocalNetworkPermissionWifiFixes {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"fixCasting_enabled"]) {
+        return YES;
+    }
+    return %orig;
+}
+%end
+
+%hook YTHotConfig
+- (BOOL)isPromptForLocalNetworkPermissionsEnabled {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"fixCasting_enabled"]) {
+        return YES;
+    }
+    return %orig;
+}
+%end
+
 %ctor {
     [[NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/Frameworks/Module_Framework.framework", [[NSBundle mainBundle] bundlePath]]] load];
     

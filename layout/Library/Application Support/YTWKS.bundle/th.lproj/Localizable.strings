@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "ปิดใช้งานมินิเพลเยอร์ลอย";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "ปิดใช้งานมินิเพลเยอร์ลอย คืนค่าแถบด้านล่าง";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "ขอบจอเต็มหน้าจอเสมือน";
+"VIRTUAL_BEZEL_DESC" = "เพิ่มโซนสัมผัสที่ปลอดภัยแบบมองไม่เห็นบนแถบสีดำเพื่อป้องกันการแตะและการข้ามโดยไม่ตั้งใจ สำหรับ iPhone ที่ไม่มีปุ่มโฮม";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "ซ่อนสรุป AI (ทดลอง)";
+"HIDE_AI_SUMMARIES_DESC" = "ซ่อนปุ่มสรุปที่สร้างโดย AI ที่ปรากฏใต้วิดีโอในฟีด ฟีเจอร์ทดลอง";
+
+// Fix Casting
+"FIX_CASTING" = "แก้ไขการส่งสัญญาณ";
+"FIX_CASTING_DESC" = "พยายามแก้ไขการส่งสัญญาณโดยเปลี่ยนแฟล็ก A/B บางตัว ทำงานได้เฉพาะใน v20.10.4 หรือต่ำกว่า";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "การจัดการการตั้งค่า";
 "IMPORT_PREFERENCES" = "นำเข้าการตั้งค่า";

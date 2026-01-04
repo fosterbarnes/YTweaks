@@ -219,6 +219,19 @@ NSBundle *YTWKSBundle() {
         settingItemId:3];
     [sectionItems addObject:virtualBezel];
 
+    // Fix Casting
+    YTSettingsSectionItem *fixCasting = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"FIX_CASTING")
+        titleDescription:LOC(@"FIX_CASTING_DESC")
+        accessibilityIdentifier:nil
+        switchOn:[defaults boolForKey:@"fixCasting_enabled"]
+        switchBlock:^BOOL (YTSettingsCell *cell, BOOL enabled) {
+            [defaults setBool:enabled forKey:@"fixCasting_enabled"];
+            [defaults synchronize];
+            return YES;
+        }
+        settingItemId:5];
+    [sectionItems addObject:fixCasting];
+
     // Hide AI Summaries (Experimental)
     YTSettingsSectionItem *hideAISummaries = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"HIDE_AI_SUMMARIES")
         titleDescription:LOC(@"HIDE_AI_SUMMARIES_DESC")
@@ -235,7 +248,7 @@ NSBundle *YTWKSBundle() {
     // Version number footer (at the bottom)
     // TWEAK_VERSION is defined via compiler flag -DTWEAK_VERSION=$(PACKAGE_VERSION)
     #ifndef TWEAK_VERSION
-    #define TWEAK_VERSION 0.3.0
+    #define TWEAK_VERSION 0.3.1
     #endif
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
@@ -290,7 +303,8 @@ NSBundle *YTWKSBundle() {
             [key hasPrefix:@"fullscreenToTheLeft"] || 
             [key hasPrefix:@"enable"] ||
             [key hasPrefix:@"virtualBezel"] ||
-            [key hasPrefix:@"hideAISummaries"]) {
+            [key hasPrefix:@"hideAISummaries"] ||
+            [key hasPrefix:@"fixCasting"]) {
             ytweaksPrefs[key] = prefs[key];
         }
     }
@@ -360,7 +374,8 @@ NSBundle *YTWKSBundle() {
                       @"fullscreenToTheLeft_enabled", 
                       @"enableIosFloatingMiniplayer",
                       @"virtualBezel_enabled",
-                      @"hideAISummaries_enabled"];
+                      @"hideAISummaries_enabled",
+                      @"fixCasting_enabled"];
     
     for (NSString *key in keys) {
         [defaults removeObjectForKey:key];

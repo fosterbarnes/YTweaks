@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Desativar miniplayer flutuante";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "Desativa o miniplayer flutuante. Restaura a barra na parte inferior.";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "Molduras virtuais de tela cheia";
+"VIRTUAL_BEZEL_DESC" = "Adiciona zonas de toque seguras invisíveis nas barras pretas para evitar toques e pulos acidentais. Destinado a iPhones sem botão inicial.";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "Ocultar Resumos de IA (Experimental)";
+"HIDE_AI_SUMMARIES_DESC" = "Oculta os botões de resumo gerados por IA que aparecem abaixo dos vídeos no feed. Recurso experimental.";
+
+// Fix Casting
+"FIX_CASTING" = "Corrigir Transmissão";
+"FIX_CASTING_DESC" = "Tenta corrigir a transmissão alterando alguns sinalizadores A/B. Funciona apenas na v20.10.4 ou inferior";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Gerenciamento de preferências";
 "IMPORT_PREFERENCES" = "Importar preferências";

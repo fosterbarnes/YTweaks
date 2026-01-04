@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Nonaktifkan miniplayer mengambang";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "Menonaktifkan miniplayer mengambang. Memulihkan bilah di bagian bawah.";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "Bingkai layar penuh virtual";
+"VIRTUAL_BEZEL_DESC" = "Menambahkan zona sentuh aman yang tidak terlihat pada bilah hitam untuk mencegah ketukan dan lompatan yang tidak disengaja. Ditujukan untuk iPhone tanpa tombol beranda.";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "Sembunyikan Ringkasan AI (Eksperimental)";
+"HIDE_AI_SUMMARIES_DESC" = "Menyembunyikan tombol ringkasan yang dihasilkan AI yang muncul di bawah video di feed. Fitur eksperimental.";
+
+// Fix Casting
+"FIX_CASTING" = "Perbaiki Pemutaran";
+"FIX_CASTING_DESC" = "Mencoba memperbaiki pemutaran dengan mengubah beberapa flag A/B. Hanya berfungsi pada v20.10.4 atau lebih rendah";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "Manajemen preferensi";
 "IMPORT_PREFERENCES" = "Impor preferensi";

@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "禁用浮动迷你播放器";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "禁用浮动迷你播放器。恢复底部栏。";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "虚拟全屏边框";
+"VIRTUAL_BEZEL_DESC" = "在黑条上添加不可见的触摸安全区域，以防止意外点击和跳过。适用于没有主屏幕按钮的 iPhone。";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "隐藏 AI 摘要（实验性）";
+"HIDE_AI_SUMMARIES_DESC" = "隐藏出现在信息流中视频下方的 AI 生成的摘要按钮。实验性功能。";
+
+// Fix Casting
+"FIX_CASTING" = "修复投屏";
+"FIX_CASTING_DESC" = "尝试通过更改一些 A/B 标志来修复投屏功能。仅适用于 v20.10.4 或更低版本";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "偏好设置管理";
 "IMPORT_PREFERENCES" = "导入偏好设置";

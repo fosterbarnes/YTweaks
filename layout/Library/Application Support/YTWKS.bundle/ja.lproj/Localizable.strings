@@ -14,6 +14,18 @@
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "フローティングミニプレーヤーを無効化";
 "ENABLE_IOS_FLOATING_MINIPLAYER_DESC" = "フローティングミニプレーヤーを無効にします。下部のバーが復元されます。";
 
+// Virtual Bezel
+"VIRTUAL_BEZEL" = "仮想フルスクリーンベゼル";
+"VIRTUAL_BEZEL_DESC" = "黒いバーに目に見えないタッチ安全ゾーンを追加して、誤タップやスキップを防ぎます。ホームボタンのないiPhone向けです。";
+
+// Hide AI Summaries (Experimental)
+"HIDE_AI_SUMMARIES" = "AI要約を非表示（実験的）";
+"HIDE_AI_SUMMARIES_DESC" = "フィード内の動画の下に表示されるAI生成の要約ボタンを非表示にします。実験的な機能です。";
+
+// Fix Casting
+"FIX_CASTING" = "キャストの修正";
+"FIX_CASTING_DESC" = "一部のA/Bフラグを変更してキャスト機能を修正しようとします。v20.10.4以下でのみ動作します";
+
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "設定管理";
 "IMPORT_PREFERENCES" = "設定をインポート";
