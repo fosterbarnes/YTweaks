@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>YTWKS</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ps.ytwks</string>
+	<string>com.fosterbarnes.ytwks</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
