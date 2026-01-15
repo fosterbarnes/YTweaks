@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   build:
-    name: 
+    name: Build YTweaks .deb package
     runs-on: macos-latest
     permissions:
       contents: write
@@ -87,7 +87,6 @@ jobs:
 
       - name: Collect DEB files
         run: |
-          cd ${{ github.workspace }}
           mkdir -p debs
           if [ -f "ytwks.deb" ]; then
             cp "ytwks.deb" debs/
@@ -97,7 +96,7 @@ jobs:
 
       - name: Rename DEB files
         run: |
-          cd ${{ github.workspace }}/debs
+          cd debs
           [ -f "ytwks.deb" ] && mv "ytwks.deb" "YTweaks.deb"
           echo "Renamed DEB file to YTweaks.deb"
 
