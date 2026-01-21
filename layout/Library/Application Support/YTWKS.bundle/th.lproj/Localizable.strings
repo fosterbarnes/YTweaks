@@ -4,11 +4,11 @@
 
 // Fullscreen to the Right
 "FULLSCREEN_TO_THE_RIGHT" = "เต็มจอไปทางขวา";
-"FULLSCREEN_TO_THE_RIGHT_DESC" = "เข้าสู่โหมดเต็มจอโดยใช้ปุ่มหรือแถบหน้าแรกที่อยู่ทางด้านขวาเสมอ";
+"FULLSCREEN_TO_THE_RIGHT_DESC" = "เข้าสู่โหมดเต็มหน้าจอโดยใช้ปุ่มหรือแถบหน้าแรกทางด้านขวาเสมอ";
 
 // Fullscreen to the Left
 "FULLSCREEN_TO_THE_LEFT" = "เต็มจอไปทางซ้าย";
-"FULLSCREEN_TO_THE_LEFT_DESC" = "เข้าสู่โหมดเต็มจอโดยใช้ด้านบนของโทรศัพท์ที่อยู่ทางด้านขวาเสมอ";
+"FULLSCREEN_TO_THE_LEFT_DESC" = "เข้าสู่โหมดเต็มหน้าจอโดยใช้ด้านบนขวาของโทรศัพท์เสมอ";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "ปิดใช้งานมินิเพลเยอร์ลอย";
@@ -24,7 +24,7 @@
 
 // Fix Casting
 "FIX_CASTING" = "แก้ไขการแคสต์";
-"FIX_CASTING_DESC" = "พยายามแก้ไขการแคสต์โดยเปลี่ยนแฟล็ก A/B บางตัว ใช้งานได้เฉพาะใน YouTube เวอร์ชั่น 20.10.4 หรือต่ำกว่า";
+"FIX_CASTING_DESC" = "ลองแก้ไขการแคสต์โดยเปลี่ยนแฟล็ก A/B บางตัว ใช้งานได้ในเฉพาะ YouTube เวอร์ชั่น 20.10.4 หรือต่ำกว่า";
 
 // Preferences Management
 "PREFERENCES_MANAGEMENT" = "การจัดการการตั้งค่า";
