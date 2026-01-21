@@ -1,11 +1,9 @@
-Package: com.ps.ytweaks
+Package: com.fosterbarnes.ytweaks
 Name: YTweaks
 Version: 0.3.1
 Architecture: iphoneos-arm
 Description: Various tweaks for YouTube
-Maintainer: PoomSmart
-Author: PoomSmart
+Maintainer: fosterbarnes
+Author: fosterbarnes
 Section: Tweaks
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 11.0)
-Depiction: https://poomsmart.github.io/repo/depictions/ytabconfig.html
-SileoDepiction: https://poomsmart.github.io/repo/sileodepictions/ytabconfig.json

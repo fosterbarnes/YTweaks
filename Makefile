@@ -5,9 +5,9 @@ else ifeq ($(THEOS_PACKAGE_SCHEME),roothide)
 else
 	TARGET = iphone:clang:latest:11.0
 endif
+
 INSTALL_TARGET_PROCESSES = YouTube
 ARCHS = arm64
-PACKAGE_VERSION = 0.3.1
 
 include $(THEOS)/makefiles/common.mk
 

@@ -22,8 +22,11 @@ Refer to [YTPlusYTweaks](https://github.com/fosterbarnes/YTPlusYTweaks#how-to-bu
 
 ## Supported YouTube versions
 
-Confirmed version 20.10.4 - 20.50.9. Lower/higher are either untested or unsupported.
+20.10.4 is recommended. 'Fix Casting' and 'Disable floating miniplayer' settings do not yet work on newer versions.
 
+**Latest confirmed:** 21.02.3
+
+**Date tested:** 1/17/2026
 ## Special Thanks
 
 Thanks to PoomSmart for making the various tweaks that made this possible. This tweak is essentially a stripped down fork of https://github.com/PoomSmart/YTABConfig
