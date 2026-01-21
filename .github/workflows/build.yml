@@ -137,7 +137,7 @@ jobs:
         with:
           tag_name: v${{ env.YTWEAKS_VERSION }}
           name: YTweaks v${{ env.YTWEAKS_VERSION }}
-          files: debs/*.deb
+          files: ${{ github.workspace }}/*.deb
           draft: true
 
       - name: Output Release URL
