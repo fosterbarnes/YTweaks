@@ -24,6 +24,9 @@ jobs:
       contents: write
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.1.7
+
       - name: Install Dependencies
         run: brew install make ldid
 
@@ -110,15 +113,18 @@ jobs:
             git clone --quiet --depth=1 https://github.com/PoomSmart/PSHeader.git
           fi
 
-      - name: Clone YTweaks
-        run: git clone --quiet --depth=1 https://github.com/fosterbarnes/YTweaks.git
-
       - name: Build YTweaks
         run: |
-          cd YTweaks
           echo "Building YTweaks..."
           make clean package DEBUG=0 FINALPACKAGE=1
           mv packages/*.deb ${{ github.workspace }}/ytwks.deb
+
+      # TODO: fix building rootless deb
+      # - name: Build YTweaks (rootless)
+      #   run: |
+      #     echo "Building YTweaks (rootless)..."
+      #     make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+      #     mv packages/*.deb ${{ github.workspace }}/ytwks_rtls.deb
 
       - name: Collect DEB files
         run: |
@@ -127,13 +133,19 @@ jobs:
             cp "ytwks.deb" debs/
             echo "Collected: ytwks.deb"
           fi
+          if [ -f "ytwks_rtls.deb" ]; then
+            cp "ytwks_rtls.deb" debs/
+            echo "Collected: ytwks_rtls.deb"
+          fi
           echo "Total DEB files: $(ls -1 debs/*.deb 2>/dev/null | wc -l | tr -d ' ')"
 
       - name: Rename DEB files
         run: |
           cd debs
           [ -f "ytwks.deb" ] && mv "ytwks.deb" "YTweaks.deb"
-          echo "Renamed DEB file to YTweaks.deb"
+          [ -f "ytwks_rtls.deb" ] && mv "ytwks_rtls.deb" "YTweaks-rootless.deb"
+          echo "Renamed DEB files:"
+          ls -1 *.deb 2>/dev/null || echo "No DEB files found"
 
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v2.5.0

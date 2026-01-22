@@ -3,7 +3,9 @@
 #import <YouTubeHeader/YTSettingsSectionItem.h>
 #import <YouTubeHeader/YTSettingsSectionItemManager.h>
 #import <YouTubeHeader/YTSettingsViewController.h>
+#import <YouTubeHeader/YTToastResponderEvent.h>
 #import <YouTubeHeader/YTSettingsCell.h>
+#import <YouTubeHeader/YTAlertView.h>
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
@@ -12,22 +14,7 @@
 #define _LOC(b, x) [b localizedStringForKey:x value:nil table:nil]
 #define LOC(x) _LOC(tweakBundle, x)
 
-static const NSInteger YTWKSSection = 'ytwk';  // Use integer between YTUHD and YouPiP
-
-@interface YTAlertView : UIView
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *subtitle;
-+ (instancetype)confirmationDialogWithAction:(void (^)(void))action 
-                                 actionTitle:(NSString *)actionTitle
-                                cancelAction:(void (^)(void))cancelAction
-                                 cancelTitle:(NSString *)cancelTitle;
-- (void)show;
-@end
-
-@interface YTToastResponderEvent : NSObject
-+ (instancetype)eventWithMessage:(NSString *)message firstResponder:(UIResponder *)responder;
-- (void)send;
-@end
+static const NSInteger YTWKSSection = 'ytwk'; // For YouGroupSettings
 
 @interface YTSettingsSectionItemManager (YTweaks) <UIDocumentPickerDelegate>
 @property (nonatomic, assign) BOOL isImportingPreferences;
@@ -248,7 +235,7 @@ NSBundle *YTWKSBundle() {
     // Version number footer (at the bottom)
     // TWEAK_VERSION is defined via compiler flag -DTWEAK_VERSION=$(PACKAGE_VERSION)
     #ifndef TWEAK_VERSION
-    #define TWEAK_VERSION 0.3.1
+    #define TWEAK_VERSION 0.3.2
     #endif
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
