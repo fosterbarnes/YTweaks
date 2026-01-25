@@ -1,4 +1,4 @@
-name: Build YTweaks .deb package
+name: Build YTweaks .deb(s) packages
 on:
   workflow_dispatch:
     inputs:
@@ -18,19 +18,19 @@ concurrency:
 
 jobs:
   build:
-    name: Build YTweaks .deb package
+    name: Build YTweaks .deb(s) packages
     runs-on: macos-latest
     permissions:
       contents: write
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v6.0.1
 
       - name: Install Dependencies
         run: brew install make ldid
 
-      - name: Set PATH environment variable
+      - name: Set PATH environments variable
         run: |
           echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
           echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV 
@@ -49,14 +49,14 @@ jobs:
 
       - name: Cache Theos
         id: theos
-        uses: actions/cache@v5.0.1
+        uses: actions/cache@v5.0.2
         with:
           path: theos/
           key: theos_${{ steps.get_theos_commit.outputs.theos }}_${{ inputs.sdk_version }}
     
       - name: Setup Theos
         if: steps.theos.outputs.cache-hit != 'true'
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v6.0.1
         with:
           repository: theos/theos
           path: theos
@@ -65,7 +65,7 @@ jobs:
       - name: Download iOS 16.5 SDK
         if: steps.theos.outputs.cache-hit != 'true' && inputs.sdk_version == '16.5'
         run: |
-          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/theos/sdks/
+          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/theos/sdks.git
           cd sdks
           git sparse-checkout set --no-cone iPhoneOS16.5.sdk
           git checkout
@@ -74,7 +74,7 @@ jobs:
       - name: Download iOS 17.5 SDK
         if: steps.theos.outputs.cache-hit != 'true' && inputs.sdk_version == '17.5'
         run: |
-          git clone --quiet --no-tags --single-branch --depth=1 -n --filter=tree:0 https://github.com/Tonwalter888/iOS-17.5-SDK
+          git clone --quiet --no-tags --single-branch --depth=1 -n --filter=tree:0 https://github.com/Tonwalter888/iOS-17.5-SDK.git
           cd iOS-17.5-SDK
           git sparse-checkout set --no-cone iPhoneOS17.5.sdk
           git checkout
@@ -119,12 +119,11 @@ jobs:
           make clean package DEBUG=0 FINALPACKAGE=1
           mv packages/*.deb ${{ github.workspace }}/ytwks.deb
 
-      # TODO: fix building rootless deb
-      # - name: Build YTweaks (rootless)
-      #   run: |
-      #     echo "Building YTweaks (rootless)..."
-      #     make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-      #     mv packages/*.deb ${{ github.workspace }}/ytwks_rtls.deb
+      - name: Build YTweaks (rootless)
+        run: |
+          echo "Building YTweaks (rootless)..."
+          make clean package DEBUG=0 FINALPACKAGE=1 ROOTLESS=1
+          mv packages/*.deb ${{ github.workspace }}/ytwks_rtls.deb
 
       - name: Collect DEB files
         run: |

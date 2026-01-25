@@ -1,11 +1,4 @@
-ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
-	TARGET = iphone:clang:latest:15.0
-else ifeq ($(THEOS_PACKAGE_SCHEME),roothide)
-	TARGET = iphone:clang:latest:15.0
-else
-	TARGET := iphone:clang:latest:11.0
-endif
-
+TARGET := iphone:clang:latest:11.0
 INSTALL_TARGET_PROCESSES = YouTube
 ARCHS = arm64
 
@@ -14,7 +7,23 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = YTweaks
 
 $(TWEAK_NAME)_FILES = Settings.x Tweak.x
-$(TWEAK_NAME)_CFLAGS = -fobjc-arc -DTWEAK_VERSION=$(PACKAGE_VERSION)
+$(TWEAK_NAME)_CFLAGS = -fobjc-arc
 $(TWEAK_NAME)_FRAMEWORKS = UIKit
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+
+ifeq ($(ROOTLESS),1)
+after-stage::
+	@echo "Fixing CydiaSubstrate paths"
+	@find $(THEOS_STAGING_DIR) -type f | while read f; do \
+		if file "$$f" | grep -q "Mach-O"; then \
+			if otool -L "$$f" | grep -q "/Library/Frameworks/CydiaSubstrate.framework"; then \
+				echo "  → fixing $$f"; \
+				install_name_tool -change \
+					/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate \
+					@rpath/CydiaSubstrate.framework/CydiaSubstrate \
+					"$$f"; \
+			fi; \
+		fi; \
+	done
+endif

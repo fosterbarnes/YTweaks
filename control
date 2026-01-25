@@ -1,8 +1,8 @@
 Package: com.fosterbarnes.ytweaks
 Name: YTweaks
-Version: 0.3.2
+Version: 0.3.3
 Architecture: iphoneos-arm
-Description: Various tweaks for YouTube
+Description: A good tweak for iOS YouTube app.
 Maintainer: fosterbarnes
 Author: fosterbarnes
 Section: Tweaks

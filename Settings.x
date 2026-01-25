@@ -233,10 +233,7 @@ NSBundle *YTWKSBundle() {
     [sectionItems addObject:hideAISummaries];
 
     // Version number footer (at the bottom)
-    // TWEAK_VERSION is defined via compiler flag -DTWEAK_VERSION=$(PACKAGE_VERSION)
-    #ifndef TWEAK_VERSION
-    #define TWEAK_VERSION 0.3.2
-    #endif
+    #define TWEAK_VERSION 0.3.3
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
     NSString *versionString = [NSString stringWithFormat:@"YTweaks v%s", TOSTRING(TWEAK_VERSION)];
