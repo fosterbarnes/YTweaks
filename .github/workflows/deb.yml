@@ -119,9 +119,9 @@ jobs:
           make clean package DEBUG=0 FINALPACKAGE=1
           mv packages/*.deb ${{ github.workspace }}/ytwks.deb
 
-      - name: Build YTweaks (rootless)
+      - name: Build YTweaks (Rootless)
         run: |
-          echo "Building YTweaks (rootless)..."
+          echo "Building YTweaks (Rootless)..."
           make clean package DEBUG=0 FINALPACKAGE=1 ROOTLESS=1
           mv packages/*.deb ${{ github.workspace }}/ytwks_rtls.deb
 
@@ -142,7 +142,7 @@ jobs:
         run: |
           cd debs
           [ -f "ytwks.deb" ] && mv "ytwks.deb" "YTweaks.deb"
-          [ -f "ytwks_rtls.deb" ] && mv "ytwks_rtls.deb" "YTweaks-rootless.deb"
+          [ -f "ytwks_rtls.deb" ] && mv "ytwks_rtls.deb" "YTweaks-Rootless.deb"
           echo "Renamed DEB files:"
           ls -1 *.deb 2>/dev/null || echo "No DEB files found"
 

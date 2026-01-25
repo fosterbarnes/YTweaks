@@ -14,11 +14,9 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 
 ifeq ($(ROOTLESS),1)
 after-stage::
-	@echo "Fixing CydiaSubstrate paths"
 	@find $(THEOS_STAGING_DIR) -type f | while read f; do \
 		if file "$$f" | grep -q "Mach-O"; then \
 			if otool -L "$$f" | grep -q "/Library/Frameworks/CydiaSubstrate.framework"; then \
-				echo "  → Fixing $$f"; \
 				install_name_tool -change \
 					/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate \
 					@rpath/CydiaSubstrate.framework/CydiaSubstrate \
