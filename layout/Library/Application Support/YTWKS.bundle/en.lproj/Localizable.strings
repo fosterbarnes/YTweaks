@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Force Fullscreen Direction";
-"FULLSCREEN_MODE_DESC" = "Always enter fullscreen with home button/bar on the left/right side.";
 "FULLSCREEN_OFF" = "Off";
 "FULLSCREEN_LEFT" = "Left";
 "FULLSCREEN_RIGHT" = "Right";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Night Mode";
-"NIGHT_MODE_DESC" = "Dims the screen below minimum brightness by overlaying a dark filter.";
 "NIGHT_MODE_OFF" = "Off";
 "NIGHT_MODE_LOW" = "Low";
 "NIGHT_MODE_MEDIUM" = "Medium";

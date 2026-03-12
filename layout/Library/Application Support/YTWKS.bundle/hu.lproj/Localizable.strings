@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Teljes képernyő irányának kényszerítése";
-"FULLSCREEN_MODE_DESC" = "Mindig bal vagy jobb oldalon legyen a kezdőlap gomb/sáv, amikor teljes képernyős módba lép.";
-
 "FULLSCREEN_OFF" = "Ki";
 "FULLSCREEN_LEFT" = "Bal";
 "FULLSCREEN_RIGHT" = "Jobb";

@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Tam Ekran Yönünü Zorla";
-"FULLSCREEN_MODE_DESC" = "Ana ekran düğmesi/çubuğu her zaman sol veya sağ tarafta olacak şekilde tam ekrana geçer.";
-
 "FULLSCREEN_OFF" = "Kapalı";
 "FULLSCREEN_LEFT" = "Sol";
 "FULLSCREEN_RIGHT" = "Sağ";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Gece Modu";
-"NIGHT_MODE_DESC" = "Koyu bir filtre kaplayarak ekranı minimum parlaklığın altına karartır.";
 "NIGHT_MODE_OFF" = "Kapalı";
 "NIGHT_MODE_LOW" = "Düşük";
 "NIGHT_MODE_MEDIUM" = "Orta";

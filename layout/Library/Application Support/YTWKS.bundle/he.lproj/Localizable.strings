@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "כפיית כיוון מסך מלא";
-"FULLSCREEN_MODE_DESC" = "תמיד להיכנס למסך מלא עם כפתור/סרגל הבית בצד שמאל או ימין.";
 "FULLSCREEN_OFF" = "כבוי";
 "FULLSCREEN_LEFT" = "שמאל";
 "FULLSCREEN_RIGHT" = "ימין";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "מצב לילה";
-"NIGHT_MODE_DESC" = "מעכה את המסך מתחת לבהירות המינימלית בשכבת פילטר כהה.";
 "NIGHT_MODE_OFF" = "כבוי";
 "NIGHT_MODE_LOW" = "נמוך";
 "NIGHT_MODE_MEDIUM" = "בינוני";

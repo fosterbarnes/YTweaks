@@ -151,7 +151,7 @@ NSBundle *YTWKSBundle() {
     // Fullscreen Mode with segmented control (Off | Left | Right)
     // Level 0 = Off, 1 = Left, 2 = Right
     YTSettingsSectionItem *fullscreenMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"FULLSCREEN_MODE")
-        titleDescription:LOC(@"FULLSCREEN_MODE_DESC")
+        titleDescription:nil
         accessibilityIdentifier:@"fullscreenModeSegment"
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
@@ -162,7 +162,7 @@ NSBundle *YTWKSBundle() {
     // Night Mode with segmented control (Off | Low | Medium | High | Maximum)
     // Level 0 = Off, 1 = Low (0.3), 2 = Medium (0.5), 3 = High (0.7), 4 = Maximum (0.9)
     YTSettingsSectionItem *nightMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"NIGHT_MODE")
-        titleDescription:LOC(@"NIGHT_MODE_DESC")
+        titleDescription:nil
         accessibilityIdentifier:@"nightModeSegment"
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
@@ -229,7 +229,7 @@ NSBundle *YTWKSBundle() {
     [sectionItems addObject:hideAISummaries];
 
     // Version number footer (at the bottom)
-    #define TWEAK_VERSION 0.4.0
+    #define TWEAK_VERSION 0.4.1
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
     NSString *versionString = [NSString stringWithFormat:@"YTweaks v%s", TOSTRING(TWEAK_VERSION)];

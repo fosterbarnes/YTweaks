@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Forțează direcția ecran complet";
-"FULLSCREEN_MODE_DESC" = "Intră întotdeauna în modul ecran complet cu butonul/bara de acasă în partea stângă sau dreaptă.";
-
 "FULLSCREEN_OFF" = "Oprit";
 "FULLSCREEN_LEFT" = "Stânga";
 "FULLSCREEN_RIGHT" = "Dreapta";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Mod Noapte";
-"NIGHT_MODE_DESC" = "Întunecă ecranul sub luminozitatea minimă prin suprapunerea unui filtru întunecat.";
 "NIGHT_MODE_OFF" = "Oprit";
 "NIGHT_MODE_LOW" = "Scăzut";
 "NIGHT_MODE_MEDIUM" = "Mediu";

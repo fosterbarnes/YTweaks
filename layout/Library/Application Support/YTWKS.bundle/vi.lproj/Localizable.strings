@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Buộc hướng toàn màn hình";
-"FULLSCREEN_MODE_DESC" = "Luôn vào chế độ toàn màn hình với nút/thanh trang chủ ở bên trái hoặc phải.";
-
 "FULLSCREEN_OFF" = "Tắt";
 "FULLSCREEN_LEFT" = "Trái";
 "FULLSCREEN_RIGHT" = "Phải";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Chế độ Ban đêm";
-"NIGHT_MODE_DESC" = "Làm mờ màn hình dưới độ sáng tối thiểu bằng cách phủ bộ lọc tối.";
 "NIGHT_MODE_OFF" = "Tắt";
 "NIGHT_MODE_LOW" = "Thấp";
 "NIGHT_MODE_MEDIUM" = "TB";

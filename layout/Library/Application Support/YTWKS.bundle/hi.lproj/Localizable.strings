@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "फ़ुलस्क्रीन दिशा बल दें";
-"FULLSCREEN_MODE_DESC" = "होम बटन/बार बाएं या दाएं रखकर हमेशा फ़ुलस्क्रीन में प्रवेश करें।";
 "FULLSCREEN_OFF" = "बंद";
 "FULLSCREEN_LEFT" = "बाएं";
 "FULLSCREEN_RIGHT" = "दाएं";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "नाइट मोड";
-"NIGHT_MODE_DESC" = "गहरे फ़िल्टर से स्क्रीन को न्यूनतम चमक से नीचे कम करता है।";
 "NIGHT_MODE_OFF" = "बंद";
 "NIGHT_MODE_LOW" = "कम";
 "NIGHT_MODE_MEDIUM" = "मध्यम";

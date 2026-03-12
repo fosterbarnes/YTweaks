@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "強制全螢幕方向";
-"FULLSCREEN_MODE_DESC" = "始終以主畫面按鈕/列在左側或右側的方式進入全螢幕。";
-
 "FULLSCREEN_OFF" = "關";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "夜間模式";
-"NIGHT_MODE_DESC" = "透過疊加深色濾鏡將螢幕亮度降低到最低亮度以下。";
 "NIGHT_MODE_OFF" = "關";
 "NIGHT_MODE_LOW" = "低";
 "NIGHT_MODE_MEDIUM" = "中";

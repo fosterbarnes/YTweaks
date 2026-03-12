@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Vollbild-Richtung erzwingen";
-"FULLSCREEN_MODE_DESC" = "Immer mit Home-Button/-Leiste links oder rechts ins Vollbild wechseln.";
-
 "FULLSCREEN_OFF" = "Aus";
 "FULLSCREEN_LEFT" = "Links";
 "FULLSCREEN_RIGHT" = "Rechts";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Nachtmodus";
-"NIGHT_MODE_DESC" = "Verdunkelt den Bildschirm unter die minimale Helligkeit durch Überlagerung eines dunklen Filters.";
 "NIGHT_MODE_OFF" = "Aus";
 "NIGHT_MODE_LOW" = "Niedrig";
 "NIGHT_MODE_MEDIUM" = "Mittel";

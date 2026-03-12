@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Vynutit směr celé obrazovky";
-"FULLSCREEN_MODE_DESC" = "Vždy přejít na celou obrazovku s tlačítkem/lištou domů vlevo nebo vpravo.";
 "FULLSCREEN_OFF" = "Vypnuto";
 "FULLSCREEN_LEFT" = "Vlevo";
 "FULLSCREEN_RIGHT" = "Vpravo";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Noční režim";
-"NIGHT_MODE_DESC" = "Ztlumí obrazovku pod minimální jas překrytím tmavého filtru.";
 "NIGHT_MODE_OFF" = "Vypnuto";
 "NIGHT_MODE_LOW" = "Nízká";
 "NIGHT_MODE_MEDIUM" = "Střední";

@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "فرض اتجاه ملء الشاشة";
-"FULLSCREEN_MODE_DESC" = "دخول وضع ملء الشاشة دائماً مع زر/شريط الصفحة الرئيسية على الجانب الأيسر أو الأيمن.";
 "FULLSCREEN_OFF" = "إيقاف";
 "FULLSCREEN_LEFT" = "يسار";
 "FULLSCREEN_RIGHT" = "يمين";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "الوضع الليلي";
-"NIGHT_MODE_DESC" = "يعتم الشاشة إلى ما دون الحد الأدنى للسطوع عن طريق تراكب فلتر داكن.";
 "NIGHT_MODE_OFF" = "إيقاف";
 "NIGHT_MODE_LOW" = "منخفض";
 "NIGHT_MODE_MEDIUM" = "متوسط";

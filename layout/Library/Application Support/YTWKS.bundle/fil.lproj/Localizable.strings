@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Pilitin ang Direksyon ng Full Screen";
-"FULLSCREEN_MODE_DESC" = "Laging pumasok sa full screen na naka-home button/bar sa kaliwa o kanan.";
 "FULLSCREEN_OFF" = "Off";
 "FULLSCREEN_LEFT" = "Kaliwa";
 "FULLSCREEN_RIGHT" = "Kanan";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Night Mode";
-"NIGHT_MODE_DESC" = "Pinapadilim ang screen sa ibaba ng minimum brightness gamit ang dark filter.";
 "NIGHT_MODE_OFF" = "Off";
 "NIGHT_MODE_LOW" = "Mababa";
 "NIGHT_MODE_MEDIUM" = "Katamtaman";

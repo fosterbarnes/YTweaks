@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Tvinga helskärmsriktning";
-"FULLSCREEN_MODE_DESC" = "Gå alltid in i helskärm med hemmaknappen/-fältet till vänster eller höger.";
 "FULLSCREEN_OFF" = "Av";
 "FULLSCREEN_LEFT" = "Vänster";
 "FULLSCREEN_RIGHT" = "Höger";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Nattläge";
-"NIGHT_MODE_DESC" = "Dämpar skärmen under minsta ljusstyrka med ett mörkt filter.";
 "NIGHT_MODE_OFF" = "Av";
 "NIGHT_MODE_LOW" = "Låg";
 "NIGHT_MODE_MEDIUM" = "Medium";

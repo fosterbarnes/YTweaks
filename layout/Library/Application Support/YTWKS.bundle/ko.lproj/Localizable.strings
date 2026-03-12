@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "전체 화면 방향 강제";
-"FULLSCREEN_MODE_DESC" = "홈 버튼/바가 왼쪽 또는 오른쪽에 오도록 항상 전체 화면으로 들어갑니다.";
-
 "FULLSCREEN_OFF" = "끔";
 "FULLSCREEN_LEFT" = "왼쪽";
 "FULLSCREEN_RIGHT" = "오른쪽";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "야간 모드";
-"NIGHT_MODE_DESC" = "어두운 필터를 오버레이하여 최소 밝기 이하로 화면을 어둡게 합니다.";
 "NIGHT_MODE_OFF" = "끔";
 "NIGHT_MODE_LOW" = "낮음";
 "NIGHT_MODE_MEDIUM" = "중간";

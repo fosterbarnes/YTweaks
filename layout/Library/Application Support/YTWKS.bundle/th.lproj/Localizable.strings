@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "บังคับทิศทางเต็มจอ";
-"FULLSCREEN_MODE_DESC" = "เข้าสู่โหมดเต็มหน้าจอโดยใช้ปุ่มหรือแถบหน้าแรกทางด้านซ้ายหรือขวาเสมอ";
-
 "FULLSCREEN_OFF" = "ปิด";
 "FULLSCREEN_LEFT" = "ซ้าย";
 "FULLSCREEN_RIGHT" = "ขวา";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "โหมดกลางคืน";
-"NIGHT_MODE_DESC" = "ลดความสว่างหน้าจอให้ต่ำกว่าความสว่างขั้นต่ำโดยการซ้อนทับฟิลเตอร์มืด";
 "NIGHT_MODE_OFF" = "ปิด";
 "NIGHT_MODE_LOW" = "ต่ำ";
 "NIGHT_MODE_MEDIUM" = "กลาง";

@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Forza direzione schermo intero";
-"FULLSCREEN_MODE_DESC" = "Entra sempre in schermo intero con il pulsante/barra home a sinistra o a destra.";
 "FULLSCREEN_OFF" = "Disattivato";
 "FULLSCREEN_LEFT" = "Sinistra";
 "FULLSCREEN_RIGHT" = "Destra";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Modalità notte";
-"NIGHT_MODE_DESC" = "Oscura lo schermo sotto la luminosità minima con un filtro scuro.";
 "NIGHT_MODE_OFF" = "Disattivato";
 "NIGHT_MODE_LOW" = "Basso";
 "NIGHT_MODE_MEDIUM" = "Medio";

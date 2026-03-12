@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Forçar direção da tela cheia";
-"FULLSCREEN_MODE_DESC" = "Sempre entrar em tela cheia com o botão/barra inicial à esquerda ou à direita.";
-
 "FULLSCREEN_OFF" = "Desligado";
 "FULLSCREEN_LEFT" = "Esquerda";
 "FULLSCREEN_RIGHT" = "Direita";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Modo Noturno";
-"NIGHT_MODE_DESC" = "Escurece a tela abaixo do brilho mínimo sobrepondo um filtro escuro.";
 "NIGHT_MODE_OFF" = "Desligado";
 "NIGHT_MODE_LOW" = "Baixo";
 "NIGHT_MODE_MEDIUM" = "Médio";

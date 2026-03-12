@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Volledig-schermrichting forceren";
-"FULLSCREEN_MODE_DESC" = "Ga altijd naar volledig scherm met de startknop/-balk links of rechts.";
 "FULLSCREEN_OFF" = "Uit";
 "FULLSCREEN_LEFT" = "Links";
 "FULLSCREEN_RIGHT" = "Rechts";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Nachtmodus";
-"NIGHT_MODE_DESC" = "Dimt het scherm onder de minimale helderheid met een donker filter.";
 "NIGHT_MODE_OFF" = "Uit";
 "NIGHT_MODE_LOW" = "Laag";
 "NIGHT_MODE_MEDIUM" = "Gemiddeld";

@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Paksa Arah Layar Penuh";
-"FULLSCREEN_MODE_DESC" = "Selalu masuk ke layar penuh dengan tombol/bar beranda di sisi kiri atau kanan.";
-
 "FULLSCREEN_OFF" = "Mati";
 "FULLSCREEN_LEFT" = "Kiri";
 "FULLSCREEN_RIGHT" = "Kanan";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Mode Malam";
-"NIGHT_MODE_DESC" = "Meredupkan layar di bawah kecerahan minimum dengan melapisi filter gelap.";
 "NIGHT_MODE_OFF" = "Mati";
 "NIGHT_MODE_LOW" = "Rendah";
 "NIGHT_MODE_MEDIUM" = "Sedang";

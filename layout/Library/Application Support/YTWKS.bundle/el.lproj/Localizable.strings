@@ -4,7 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Εξαναγκασμός κατεύθυνσης πλήρους οθόνης";
-"FULLSCREEN_MODE_DESC" = "Πάντα είσοδος σε πλήρη οθόνη με το κουμπί/μπάρα αρχικής αριστερά ή δεξιά.";
 "FULLSCREEN_OFF" = "Απενεργοποιημένο";
 "FULLSCREEN_LEFT" = "Αριστερά";
 "FULLSCREEN_RIGHT" = "Δεξιά";
@@ -40,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Νυχτερινή λειτουργία";
-"NIGHT_MODE_DESC" = "Σκουραίνει την οθόνη κάτω από την ελάχιστη φωτεινότητα με σκούρο φίλτρο.";
 "NIGHT_MODE_OFF" = "Απενεργοποιημένο";
 "NIGHT_MODE_LOW" = "Χαμηλή";
 "NIGHT_MODE_MEDIUM" = "Μεσαία";

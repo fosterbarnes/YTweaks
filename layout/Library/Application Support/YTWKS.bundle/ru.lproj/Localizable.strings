@@ -4,8 +4,6 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Направление полноэкранного режима";
-"FULLSCREEN_MODE_DESC" = "Всегда входить в полноэкранный режим с кнопкой/панелью «Домой» слева или справа.";
-
 "FULLSCREEN_OFF" = "Выкл";
 "FULLSCREEN_LEFT" = "Слева";
 "FULLSCREEN_RIGHT" = "Справа";
@@ -41,7 +39,6 @@
 
 // Night Mode
 "NIGHT_MODE" = "Ночной режим";
-"NIGHT_MODE_DESC" = "Затемняет экран ниже минимальной яркости с помощью тёмного фильтра.";
 "NIGHT_MODE_OFF" = "Выкл";
 "NIGHT_MODE_LOW" = "Низкий";
 "NIGHT_MODE_MEDIUM" = "Средний";
