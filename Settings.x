@@ -7,6 +7,7 @@
 #import <YouTubeHeader/YTSettingsCell.h>
 #import <YouTubeHeader/YTAlertView.h>
 #import <objc/runtime.h>
+#import <objc/message.h>
 #import <UIKit/UIKit.h>
 
 #define Prefix @"YTWKS"
@@ -377,6 +378,9 @@ NSBundle *YTWKSBundle() {
     %orig;
     
     NSBundle *bundle = YTWKSBundle();
+
+    NSOperatingSystemVersion ios13 = {13, 0, 0};
+    SEL tintSelector = NSSelectorFromString(@"setSelectedSegmentTintColor:");
     
     // Night Mode segmented control
     if ([self.accessibilityIdentifier isEqualToString:@"nightModeSegment"]) {
@@ -396,8 +400,10 @@ NSBundle *YTWKSBundle() {
             
             // Style for dark mode
             segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-            if (@available(iOS 13.0, *)) {
-                segment.selectedSegmentTintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+            if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
+                [segment respondsToSelector:tintSelector]) {
+                UIColor *tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+                ((void (*)(id, SEL, id))objc_msgSend)(segment, tintSelector, tintColor);
             }
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
@@ -443,8 +449,10 @@ NSBundle *YTWKSBundle() {
             
             // Style for dark mode
             segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-            if (@available(iOS 13.0, *)) {
-                segment.selectedSegmentTintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+            if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
+                [segment respondsToSelector:tintSelector]) {
+                UIColor *tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+                ((void (*)(id, SEL, id))objc_msgSend)(segment, tintSelector, tintColor);
             }
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
