@@ -27,7 +27,7 @@ Refer to [YTPlusYTweaks](https://github.com/fosterbarnes/YTPlusYTweaks#how-to-bu
 
 **Latest confirmed:** 21.24.3
 
-**Date tested:** 1/17/2026
+**Date tested:** 6/17/2026
 ## Special Thanks
 
 Thanks to PoomSmart for making the various tweaks that made this possible. This tweak is essentially a stripped down fork of https://github.com/PoomSmart/YTABConfig
