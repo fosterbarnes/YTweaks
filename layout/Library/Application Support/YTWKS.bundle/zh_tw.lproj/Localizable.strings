@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "強制全螢幕方向";
+"FULLSCREEN_MODE_DESC" = "始終以主畫面按鈕/列在左側或右側的方式進入全螢幕。";
 "FULLSCREEN_OFF" = "關";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "虛擬全螢幕邊框";
 "VIRTUAL_BEZEL_DESC" = "在黑色條上添加不可見的觸控安全區域，以防止意外點擊和跳過。適用於沒有主畫面按鈕的 iPhone。";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "隱藏 AI 摘要（實驗性）";
-"HIDE_AI_SUMMARIES_DESC" = "隱藏出現在動態消息中影片下方的 AI 生成的摘要按鈕。實驗性功能。";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "隱藏 AI 摘要";
+"HIDE_AI_SUMMARIES_DESC" = "隱藏出現在動態消息中影片下方的 AI 生成的摘要。";
 
 // Fix Casting
 "FIX_CASTING" = "修復投放";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "夜間模式";
+"NIGHT_MODE_DESC" = "透過疊加深色濾鏡將螢幕亮度降低到最低亮度以下。";
 "NIGHT_MODE_OFF" = "關";
 "NIGHT_MODE_LOW" = "低";
 "NIGHT_MODE_MEDIUM" = "中";

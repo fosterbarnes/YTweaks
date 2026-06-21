@@ -152,7 +152,7 @@ NSBundle *YTWKSBundle() {
     // Fullscreen Mode with segmented control (Off | Left | Right)
     // Level 0 = Off, 1 = Left, 2 = Right
     YTSettingsSectionItem *fullscreenMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"FULLSCREEN_MODE")
-        titleDescription:nil
+        titleDescription:LOC(@"FULLSCREEN_MODE_DESC")
         accessibilityIdentifier:@"fullscreenModeSegment"
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
@@ -163,7 +163,7 @@ NSBundle *YTWKSBundle() {
     // Night Mode with segmented control (Off | Low | Medium | High | Maximum)
     // Level 0 = Off, 1 = Low (0.3), 2 = Medium (0.5), 3 = High (0.7), 4 = Maximum (0.9)
     YTSettingsSectionItem *nightMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"NIGHT_MODE")
-        titleDescription:nil
+        titleDescription:LOC(@"NIGHT_MODE_DESC")
         accessibilityIdentifier:@"nightModeSegment"
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
@@ -216,7 +216,7 @@ NSBundle *YTWKSBundle() {
         settingItemId:5];
     [sectionItems addObject:fixCasting];
 
-    // Hide AI Summaries (Experimental)
+    // Hide AI Summaries
     YTSettingsSectionItem *hideAISummaries = [YTSettingsSectionItemClass switchItemWithTitle:LOC(@"HIDE_AI_SUMMARIES")
         titleDescription:LOC(@"HIDE_AI_SUMMARIES_DESC")
         accessibilityIdentifier:nil
@@ -230,7 +230,7 @@ NSBundle *YTWKSBundle() {
     [sectionItems addObject:hideAISummaries];
 
     // Version number footer (at the bottom)
-    #define TWEAK_VERSION 0.4.1
+    #define TWEAK_VERSION 0.5.0
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
     NSString *versionString = [NSString stringWithFormat:@"YTweaks v%s", TOSTRING(TWEAK_VERSION)];
@@ -398,7 +398,6 @@ NSBundle *YTWKSBundle() {
             segment.selectedSegmentIndex = [defaults integerForKey:@"nightMode_level"];
             [segment addTarget:self action:@selector(nightModeSegmentChanged:) forControlEvents:UIControlEventValueChanged];
             
-            // Style for dark mode
             segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
             if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
                 [segment respondsToSelector:tintSelector]) {
@@ -408,7 +407,6 @@ NSBundle *YTWKSBundle() {
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
             
-            // Use smaller font to fit all options
             UIFont *smallFont = [UIFont systemFontOfSize:11.0 weight:UIFontWeightMedium];
             [segment setTitleTextAttributes:@{NSFontAttributeName: smallFont, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSFontAttributeName: smallFont, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
@@ -416,7 +414,6 @@ NSBundle *YTWKSBundle() {
             segment.translatesAutoresizingMaskIntoConstraints = NO;
             [self.contentView addSubview:segment];
             
-            // Position below the title with constraints
             [NSLayoutConstraint activateConstraints:@[
                 [segment.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
                 [segment.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16],
@@ -424,7 +421,6 @@ NSBundle *YTWKSBundle() {
                 [segment.heightAnchor constraintEqualToConstant:32]
             ]];
         } else {
-            // Update selection if it changed externally
             NSInteger currentLevel = [defaults integerForKey:@"nightMode_level"];
             if (segment.selectedSegmentIndex != currentLevel) {
                 segment.selectedSegmentIndex = currentLevel;
@@ -447,7 +443,6 @@ NSBundle *YTWKSBundle() {
             segment.selectedSegmentIndex = [defaults integerForKey:@"fullscreen_mode"];
             [segment addTarget:self action:@selector(fullscreenModeSegmentChanged:) forControlEvents:UIControlEventValueChanged];
             
-            // Style for dark mode
             segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
             if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
                 [segment respondsToSelector:tintSelector]) {
@@ -457,7 +452,6 @@ NSBundle *YTWKSBundle() {
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
             
-            // Standard font size (fewer options than night mode)
             UIFont *font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightMedium];
             [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
             [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
@@ -465,7 +459,6 @@ NSBundle *YTWKSBundle() {
             segment.translatesAutoresizingMaskIntoConstraints = NO;
             [self.contentView addSubview:segment];
             
-            // Position below the title with constraints
             [NSLayoutConstraint activateConstraints:@[
                 [segment.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
                 [segment.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16],
@@ -473,7 +466,6 @@ NSBundle *YTWKSBundle() {
                 [segment.heightAnchor constraintEqualToConstant:32]
             ]];
         } else {
-            // Update selection if it changed externally
             NSInteger currentMode = [defaults integerForKey:@"fullscreen_mode"];
             if (segment.selectedSegmentIndex != currentMode) {
                 segment.selectedSegmentIndex = currentMode;

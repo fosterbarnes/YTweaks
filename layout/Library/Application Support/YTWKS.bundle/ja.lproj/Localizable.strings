@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "フルスクリーン方向を強制";
+"FULLSCREEN_MODE_DESC" = "常にホームボタン/バーが左または右側になるようにフルスクリーンに入ります。";
 "FULLSCREEN_OFF" = "オフ";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "仮想フルスクリーンベゼル";
 "VIRTUAL_BEZEL_DESC" = "黒いバーに目に見えないタッチ安全ゾーンを追加して、誤タップやスキップを防ぎます。ホームボタンのないiPhone向けです。";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "AI要約を非表示（実験的）";
-"HIDE_AI_SUMMARIES_DESC" = "フィード内の動画の下に表示されるAI生成の要約ボタンを非表示にします。実験的な機能です。";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "AI要約を非表示";
+"HIDE_AI_SUMMARIES_DESC" = "フィード内の動画の下に表示されるAI生成の要約を非表示にします。";
 
 // Fix Casting
 "FIX_CASTING" = "キャストの修正";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "ナイトモード";
+"NIGHT_MODE_DESC" = "暗いフィルターを重ねて、最小輝度以下に画面を暗くします。";
 "NIGHT_MODE_OFF" = "オフ";
 "NIGHT_MODE_LOW" = "低";
 "NIGHT_MODE_MEDIUM" = "中";

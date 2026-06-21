@@ -6,9 +6,9 @@ Working features:
 - **Disable floating miniplayer**: Restores the old miniplayer by disabling the floating miniplayer.
 - **Virtual fullscreen bezels**: Adds invisible touch-safe zones on black bars to prevent accidental taps and skips.
 - **Fix Casting** - Attempts to fix casting by changing some A/B flags. Only works on v20.10.4 or lower.
+- **Hide AI Summaries**: Hides AI-generated summaries below videos in the home feed. 
 
-Experimental:
-- **Hide AI Summaries**: Attempts to block/hide AI summaries below videos in the home feed.
+**Note on AI Summaries**: This setting is a work in progress. The space taken up by summaries still remains. It may take multiple app restarts for the setting to stick initially.
 
 More settings will most likely be added in the future. Designed to work with a [fork of YTLite](https://github.com/fosterbarnes/YTPlusYTweaks/) (also known as [YouTube Plus](https://github.com/dayanch96/YTLite)).
 
@@ -25,7 +25,7 @@ Refer to [YTPlusYTweaks](https://github.com/fosterbarnes/YTPlusYTweaks#how-to-bu
 
 20.10.4 is recommended. 'Fix Casting' and 'Disable floating miniplayer' settings do not yet work on newer versions.
 
-**Latest confirmed:** 21.02.3
+**Latest confirmed:** 21.24.3
 
 **Date tested:** 1/17/2026
 ## Special Thanks

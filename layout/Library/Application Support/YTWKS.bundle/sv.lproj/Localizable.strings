@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Tvinga helskärmsriktning";
+"FULLSCREEN_MODE_DESC" = "Gå alltid in i helskärm med hemmaknappen/-fältet till vänster eller höger.";
 "FULLSCREEN_OFF" = "Av";
 "FULLSCREEN_LEFT" = "Vänster";
 "FULLSCREEN_RIGHT" = "Höger";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Virtuella helskärmsramar";
 "VIRTUAL_BEZEL_DESC" = "Lägger till osynliga trygga touchzoner på de svarta fälten för att undvika misstag och hopp. För iPhone utan hemmaknapp.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Dölj AI-sammanfattningar (Experimentell)";
-"HIDE_AI_SUMMARIES_DESC" = "Döljer AI-genererade sammanfattningsknappar under videor i flödet. Experimentell funktion.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Dölj AI-sammanfattningar";
+"HIDE_AI_SUMMARIES_DESC" = "Döljer AI-genererade sammanfattningsknappar under videor i flödet.";
 
 // Fix Casting
 "FIX_CASTING" = "Åtgärda casting";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Nattläge";
+"NIGHT_MODE_DESC" = "Dämpar skärmen under minsta ljusstyrka med ett mörkt filter.";
 "NIGHT_MODE_OFF" = "Av";
 "NIGHT_MODE_LOW" = "Låg";
 "NIGHT_MODE_MEDIUM" = "Medium";

@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Vollbild-Richtung erzwingen";
+"FULLSCREEN_MODE_DESC" = "Immer mit Home-Button/-Leiste links oder rechts ins Vollbild wechseln.";
 "FULLSCREEN_OFF" = "Aus";
 "FULLSCREEN_LEFT" = "Links";
 "FULLSCREEN_RIGHT" = "Rechts";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Virtuelle Vollbild-Ränder";
 "VIRTUAL_BEZEL_DESC" = "Fügt unsichtbare berührungssichere Zonen auf schwarzen Balken hinzu, um versehentliche Berührungen und Sprünge zu verhindern. Für iPhones ohne Home-Button gedacht.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "KI-Zusammenfassungen ausblenden (Experimentell)";
-"HIDE_AI_SUMMARIES_DESC" = "Blendet KI-generierte Zusammenfassungs-Schaltflächen aus, die unter Videos im Feed erscheinen. Experimentelle Funktion.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "KI-Zusammenfassungen ausblenden";
+"HIDE_AI_SUMMARIES_DESC" = "Blendet KI-generierte Zusammenfassungs-Schaltflächen aus, die unter Videos im Feed erscheinen.";
 
 // Fix Casting
 "FIX_CASTING" = "Casting reparieren";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Nachtmodus";
+"NIGHT_MODE_DESC" = "Verdunkelt den Bildschirm unter die minimale Helligkeit durch Überlagerung eines dunklen Filters.";
 "NIGHT_MODE_OFF" = "Aus";
 "NIGHT_MODE_LOW" = "Niedrig";
 "NIGHT_MODE_MEDIUM" = "Mittel";

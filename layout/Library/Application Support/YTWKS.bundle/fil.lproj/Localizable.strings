@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Pilitin ang Direksyon ng Full Screen";
+"FULLSCREEN_MODE_DESC" = "Laging pumasok sa full screen na naka-home button/bar sa kaliwa o kanan.";
 "FULLSCREEN_OFF" = "Off";
 "FULLSCREEN_LEFT" = "Kaliwa";
 "FULLSCREEN_RIGHT" = "Kanan";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Virtual Full Screen Bezels";
 "VIRTUAL_BEZEL_DESC" = "Nagdadagdag ng invisible touch-safe zones sa black bars para maiwasan ang aksidenteng tap at skip. Para sa iPhone na walang home button.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Itago ang AI Summaries (Experimental)";
-"HIDE_AI_SUMMARIES_DESC" = "Itinatago ang AI-generated summary buttons sa ilalim ng mga video sa feed. Experimental na feature.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Itago ang AI Summaries";
+"HIDE_AI_SUMMARIES_DESC" = "Itinatago ang AI-generated summary buttons sa ilalim ng mga video sa feed.";
 
 // Fix Casting
 "FIX_CASTING" = "Ayusin ang Casting";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Night Mode";
+"NIGHT_MODE_DESC" = "Pinapadilim ang screen sa ibaba ng minimum brightness gamit ang dark filter.";
 "NIGHT_MODE_OFF" = "Off";
 "NIGHT_MODE_LOW" = "Mababa";
 "NIGHT_MODE_MEDIUM" = "Katamtaman";

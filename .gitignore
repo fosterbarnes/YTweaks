@@ -2,3 +2,5 @@
 packages/
 .DS_Store
 *.code-workspace
+debs/
+version

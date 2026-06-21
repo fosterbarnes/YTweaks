@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Tam Ekran Yönünü Zorla";
+"FULLSCREEN_MODE_DESC" = "Ana ekran düğmesi/çubuğu her zaman sol veya sağ tarafta olacak şekilde tam ekrana geçer.";
 "FULLSCREEN_OFF" = "Kapalı";
 "FULLSCREEN_LEFT" = "Sol";
 "FULLSCREEN_RIGHT" = "Sağ";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Sanal tam ekran çerçeveleri";
 "VIRTUAL_BEZEL_DESC" = "Yanlışlıkla dokunma ve atlamaları önlemek için siyah çubuklara görünmez dokunma güvenli bölgeler ekler. Ana ekran düğmesi olmayan iPhone'lar için tasarlanmıştır.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "AI Özetlerini Gizle (Deneysel)";
-"HIDE_AI_SUMMARIES_DESC" = "Akıştaki videoların altında görünen AI tarafından oluşturulan özet düğmelerini gizler. Deneysel özellik.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "AI Özetlerini Gizle";
+"HIDE_AI_SUMMARIES_DESC" = "Akıştaki videoların altında görünen AI tarafından oluşturulan özet düğmelerini gizler.";
 
 // Fix Casting
 "FIX_CASTING" = "Yayınlamayı Düzelt";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Gece Modu";
+"NIGHT_MODE_DESC" = "Koyu bir filtre kaplayarak ekranı minimum parlaklığın altına karartır.";
 "NIGHT_MODE_OFF" = "Kapalı";
 "NIGHT_MODE_LOW" = "Düşük";
 "NIGHT_MODE_MEDIUM" = "Orta";

@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Forțează direcția ecran complet";
+"FULLSCREEN_MODE_DESC" = "Intră întotdeauna în modul ecran complet cu butonul/bara de acasă în partea stângă sau dreaptă.";
 "FULLSCREEN_OFF" = "Oprit";
 "FULLSCREEN_LEFT" = "Stânga";
 "FULLSCREEN_RIGHT" = "Dreapta";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Borduri virtuale ecran complet";
 "VIRTUAL_BEZEL_DESC" = "Adaugă zone de atingere sigure invizibile pe barele negre pentru a preveni atingerile și săriturile accidentale. Destinat pentru iPhone-uri fără buton de acasă.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Ascunde Rezumatul AI (Experimental)";
-"HIDE_AI_SUMMARIES_DESC" = "Ascunde butoanele de rezumat generate de AI care apar sub videoclipuri în feed. Funcție experimentală.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Ascunde Rezumatul AI";
+"HIDE_AI_SUMMARIES_DESC" = "Ascunde butoanele de rezumat generate de AI care apar sub videoclipuri în feed.";
 
 // Fix Casting
 "FIX_CASTING" = "Repară Casting";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Mod Noapte";
+"NIGHT_MODE_DESC" = "Întunecă ecranul sub luminozitatea minimă prin suprapunerea unui filtru întunecat.";
 "NIGHT_MODE_OFF" = "Oprit";
 "NIGHT_MODE_LOW" = "Scăzut";
 "NIGHT_MODE_MEDIUM" = "Mediu";

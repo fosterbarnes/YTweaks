@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Forçar direção da tela cheia";
+"FULLSCREEN_MODE_DESC" = "Sempre entrar em tela cheia com o botão/barra inicial à esquerda ou à direita.";
 "FULLSCREEN_OFF" = "Desligado";
 "FULLSCREEN_LEFT" = "Esquerda";
 "FULLSCREEN_RIGHT" = "Direita";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Molduras virtuais de tela cheia";
 "VIRTUAL_BEZEL_DESC" = "Adiciona zonas de toque seguras invisíveis nas barras pretas para evitar toques e pulos acidentais. Destinado a iPhones sem botão inicial.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Ocultar Resumos de IA (Experimental)";
-"HIDE_AI_SUMMARIES_DESC" = "Oculta os botões de resumo gerados por IA que aparecem abaixo dos vídeos no feed. Recurso experimental.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Ocultar Resumos de IA";
+"HIDE_AI_SUMMARIES_DESC" = "Oculta os botões de resumo gerados por IA que aparecem abaixo dos vídeos no feed.";
 
 // Fix Casting
 "FIX_CASTING" = "Corrigir Transmissão";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Modo Noturno";
+"NIGHT_MODE_DESC" = "Escurece a tela abaixo do brilho mínimo sobrepondo um filtro escuro.";
 "NIGHT_MODE_OFF" = "Desligado";
 "NIGHT_MODE_LOW" = "Baixo";
 "NIGHT_MODE_MEDIUM" = "Médio";

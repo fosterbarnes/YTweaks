@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Paksa Arah Skrin Penuh";
+"FULLSCREEN_MODE_DESC" = "Sentiasa masuk skrin penuh dengan butang/bar utama di sebelah kiri atau kanan.";
 "FULLSCREEN_OFF" = "Mati";
 "FULLSCREEN_LEFT" = "Kiri";
 "FULLSCREEN_RIGHT" = "Kanan";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Bingkai skrin penuh maya";
 "VIRTUAL_BEZEL_DESC" = "Menambah zon sentuhan selamat yang tidak kelihatan pada bar hitam untuk mengelakkan ketukan dan lompatan tidak sengaja. Untuk iPhone tanpa butang utama.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Sembunyikan Ringkasan AI (Eksperimen)";
-"HIDE_AI_SUMMARIES_DESC" = "Menyembunyikan butang ringkasan yang dijana AI di bawah video dalam suapan. Ciri eksperimen.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Sembunyikan Ringkasan AI";
+"HIDE_AI_SUMMARIES_DESC" = "Menyembunyikan butang ringkasan yang dijana AI di bawah video dalam suapan.";
 
 // Fix Casting
 "FIX_CASTING" = "Baiki Penyiaran";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Mod Malam";
+"NIGHT_MODE_DESC" = "Meredupkan skrin di bawah kecerahan minimum dengan lapisan penapis gelap.";
 "NIGHT_MODE_OFF" = "Mati";
 "NIGHT_MODE_LOW" = "Rendah";
 "NIGHT_MODE_MEDIUM" = "Sederhana";

@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "전체 화면 방향 강제";
+"FULLSCREEN_MODE_DESC" = "홈 버튼/바가 왼쪽 또는 오른쪽에 오도록 항상 전체 화면으로 들어갑니다.";
 "FULLSCREEN_OFF" = "끔";
 "FULLSCREEN_LEFT" = "왼쪽";
 "FULLSCREEN_RIGHT" = "오른쪽";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "가상 전체 화면 베젤";
 "VIRTUAL_BEZEL_DESC" = "검은 막대에 보이지 않는 터치 안전 영역을 추가하여 실수로 탭하거나 건너뛰는 것을 방지합니다. 홈 버튼이 없는 iPhone용입니다.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "AI 요약 숨기기 (실험적)";
-"HIDE_AI_SUMMARIES_DESC" = "피드의 동영상 아래에 나타나는 AI 생성 요약 버튼을 숨깁니다. 실험적 기능입니다.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "AI 요약 숨기기";
+"HIDE_AI_SUMMARIES_DESC" = "피드의 동영상 아래에 나타나는 AI 생성 요약 버튼을 숨깁니다.";
 
 // Fix Casting
 "FIX_CASTING" = "TV로 시청하기 수정";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "야간 모드";
+"NIGHT_MODE_DESC" = "어두운 필터를 오버레이하여 최소 밝기 이하로 화면을 어둡게 합니다.";
 "NIGHT_MODE_OFF" = "끔";
 "NIGHT_MODE_LOW" = "낮음";
 "NIGHT_MODE_MEDIUM" = "중간";

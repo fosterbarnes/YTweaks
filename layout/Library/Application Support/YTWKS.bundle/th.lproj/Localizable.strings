@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "บังคับทิศทางเต็มจอ";
+"FULLSCREEN_MODE_DESC" = "เข้าสู่โหมดเต็มหน้าจอโดยใช้ปุ่มหรือแถบหน้าแรกทางด้านซ้ายหรือขวาเสมอ";
 "FULLSCREEN_OFF" = "ปิด";
 "FULLSCREEN_LEFT" = "ซ้าย";
 "FULLSCREEN_RIGHT" = "ขวา";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "ขอบจอเต็มหน้าจอเสมือน";
 "VIRTUAL_BEZEL_DESC" = "เพิ่มโซนสัมผัสที่ปลอดภัยแบบล่องหนบนแถบสีดำเพื่อป้องกันการแตะและการข้ามโดยไม่ตั้งใจสำหรับ iPhone ที่ไม่มีปุ่มโฮม";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "ซ่อนสรุป AI (ทดลอง)";
-"HIDE_AI_SUMMARIES_DESC" = "ซ่อนปุ่มสรุปที่สร้างโดย AI ที่ปรากฏใต้วิดีโอในฟีด ฟีเจอร์นี้ยังอยู่ในช่วงการทดลอง";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "ซ่อนสรุป AI";
+"HIDE_AI_SUMMARIES_DESC" = "ซ่อนปุ่มสรุปที่สร้างโดย AI ที่ปรากฏใต้วิดีโอในฟีด";
 
 // Fix Casting
 "FIX_CASTING" = "แก้ไขการแคสต์";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "โหมดกลางคืน";
+"NIGHT_MODE_DESC" = "ลดความสว่างหน้าจอให้ต่ำกว่าความสว่างขั้นต่ำโดยการซ้อนทับฟิลเตอร์มืด";
 "NIGHT_MODE_OFF" = "ปิด";
 "NIGHT_MODE_LOW" = "ต่ำ";
 "NIGHT_MODE_MEDIUM" = "กลาง";

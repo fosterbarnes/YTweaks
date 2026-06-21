@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Force Fullscreen Direction";
+"FULLSCREEN_MODE_DESC" = "Always enter fullscreen with home button/bar on the left/right side.";
 "FULLSCREEN_OFF" = "Off";
 "FULLSCREEN_LEFT" = "Left";
 "FULLSCREEN_RIGHT" = "Right";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Virtual Fullscreen Bezels";
 "VIRTUAL_BEZEL_DESC" = "Adds invisible touch-safe zones on black bars to prevent accidental taps and skips. Meant for iPhones with no home button.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Hide AI Summaries (Experimental)";
-"HIDE_AI_SUMMARIES_DESC" = "Hides AI-generated summary buttons that appear below videos in the feed. Experimental feature.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Hide AI Summaries";
+"HIDE_AI_SUMMARIES_DESC" = "Hides AI-generated summaries that appear below videos in the home feed. May take multiple app restarts to stick (WIP)";
 
 // Fix Casting
 "FIX_CASTING" = "Fix Casting";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Night Mode";
+"NIGHT_MODE_DESC" = "Dims the screen below minimum brightness by overlaying a dark filter.";
 "NIGHT_MODE_OFF" = "Off";
 "NIGHT_MODE_LOW" = "Low";
 "NIGHT_MODE_MEDIUM" = "Medium";

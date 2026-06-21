@@ -4,6 +4,7 @@
 
 // Fullscreen Mode
 "FULLSCREEN_MODE" = "Vynutit směr celé obrazovky";
+"FULLSCREEN_MODE_DESC" = "Vždy přejít na celou obrazovku s tlačítkem/lištou domů vlevo nebo vpravo.";
 "FULLSCREEN_OFF" = "Vypnuto";
 "FULLSCREEN_LEFT" = "Vlevo";
 "FULLSCREEN_RIGHT" = "Vpravo";
@@ -16,9 +17,9 @@
 "VIRTUAL_BEZEL" = "Virtuální rámečky celé obrazovky";
 "VIRTUAL_BEZEL_DESC" = "Přidává neviditelné bezpečné zóny na černé pruhy, aby zabránil náhodným klepnutím a přeskakování. Pro iPhony bez tlačítka domů.";
 
-// Hide AI Summaries (Experimental)
-"HIDE_AI_SUMMARIES" = "Skrýt souhrny AI (Experimentální)";
-"HIDE_AI_SUMMARIES_DESC" = "Skryje tlačítka souhrnů generovaných AI pod videi ve výpisu. Experimentální funkce.";
+// Hide AI Summaries
+"HIDE_AI_SUMMARIES" = "Skrýt souhrny AI";
+"HIDE_AI_SUMMARIES_DESC" = "Skryje tlačítka souhrnů generovaných AI pod videi ve výpisu.";
 
 // Fix Casting
 "FIX_CASTING" = "Opravit přenos";
@@ -39,6 +40,7 @@
 
 // Night Mode
 "NIGHT_MODE" = "Noční režim";
+"NIGHT_MODE_DESC" = "Ztlumí obrazovku pod minimální jas překrytím tmavého filtru.";
 "NIGHT_MODE_OFF" = "Vypnuto";
 "NIGHT_MODE_LOW" = "Nízká";
 "NIGHT_MODE_MEDIUM" = "Střední";

@@ -4,13 +4,14 @@
 #import <YouTubeHeader/YTGlobalConfig.h>
 #import <YouTubeHeader/YTColdConfig.h>
 #import <YouTubeHeader/YTHotConfig.h>
-#import <YouTubeHeader/YTIElementRenderer.h>
 
 // Forward declarations
 @class YTWatchViewController;
 @class YTMainAppVideoPlayerOverlayView;
-@class YTAsyncCollectionView;
-@class _ASCollectionViewCell;
+
+// Home feed cells use _ASCollectionViewCell; hook this directly, not UICollectionViewCell.
+@interface _ASCollectionViewCell : UICollectionViewCell
+@end
 
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
@@ -62,10 +63,6 @@ static void updateNightModeOverlay(void) {
         }];
     }
 }
-
-
-// Forward declaration for recursive summary finder
-static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> *identifiers);
 
 // Helper function to get original value from config instance
 static BOOL getValueFromInvocation(id target, SEL selector) {
@@ -306,376 +303,81 @@ static void hookClass(NSObject *instance) {
 }
 %end
 
-// Hide AI Summaries - Filter at element data level and remove cells
-%hook YTIElementRenderer
-- (NSData *)elementData {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return %orig;
-    }
-    
-    NSString *description = [self description];
-    
-    // Check for AI summary related strings in element description
-    // Expanded patterns based on common YouTube element naming
-    NSArray *summaryPatterns = @[
-        @"summary.eml",
-        @"ai_summary",
-        @"video_summary",
-        @"gemini",
-        @"summary_button",
-        @"summary_card",
-        @"summary_shelf",
-        @"video_summary_card",
-        @"gemini_summary",
-        @"summary_card.eml",
-        @"video_summary_button",
-        @"ai_summary_card",
-        @"gemini_button"
-    ];
-    
-    for (NSString *pattern in summaryPatterns) {
-        if ([description containsString:pattern]) {
-            // Return empty data to prevent rendering
-            return [NSData data];
-        }
-    }
-    
-    return %orig;
-}
-%end
+// Hide AI summaries on Home feed — removeFromSuperview on Flex-confirmed targets, inside-out:
+//   1. id.elements.inline_expander
+//   2. inner _ASDisplayView under id.elements.inlin*
+//   3. eml.expandable_metadata row container
 
-// Recursive function to find summary elements in node hierarchy
-static BOOL findSummaryInNodeController(id nodeController, NSArray <NSString *> *identifiers) {
-    if (!nodeController) return NO;
-    
-    // Check if nodeController has children method
-    if (![nodeController respondsToSelector:@selector(children)]) {
-        return NO;
-    }
-    
-    NSArray *children = [nodeController performSelector:@selector(children)];
-    if (!children) return NO;
-    
-    for (id child in children) {
-        // Check ELMNodeController children
-        Class ELMNodeControllerClass = objc_lookUpClass("ELMNodeController");
-        if (ELMNodeControllerClass && [child isKindOfClass:ELMNodeControllerClass]) {
-            if ([child respondsToSelector:@selector(children)]) {
-                NSArray *elmChildren = [child performSelector:@selector(children)];
-                if (elmChildren) {
-                    Class ELMComponentClass = objc_lookUpClass("ELMComponent");
-                    for (id elmChild in elmChildren) {
-                        if (ELMComponentClass && [elmChild isKindOfClass:ELMComponentClass]) {
-                            NSString *desc = [elmChild description];
-                            for (NSString *identifier in identifiers) {
-                                if (desc && [desc containsString:identifier]) {
-                                    return YES;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Check ASNodeController children
-        Class ASNodeControllerClass = objc_lookUpClass("ASNodeController");
-        if (ASNodeControllerClass && [child isKindOfClass:ASNodeControllerClass]) {
-            // Check yogaChildren for accessibility identifiers
-            if ([child respondsToSelector:@selector(node)]) {
-                id node = [child performSelector:@selector(node)];
-                Class ASDisplayNodeClass = objc_lookUpClass("ASDisplayNode");
-                if (ASDisplayNodeClass && [node isKindOfClass:ASDisplayNodeClass]) {
-                    if ([node respondsToSelector:@selector(yogaChildren)]) {
-                        NSArray *yogaChildren = [node performSelector:@selector(yogaChildren)];
-                        if (yogaChildren) {
-                            for (id displayNode in yogaChildren) {
-                                if ([displayNode respondsToSelector:@selector(accessibilityIdentifier)]) {
-                                    NSString *accId = [displayNode accessibilityIdentifier];
-                                    for (NSString *identifier in identifiers) {
-                                        if (accId && [accId containsString:identifier]) {
-                                            return YES;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // Recursively search child
-            if (findSummaryInNodeController(child, identifiers)) {
-                return YES;
-            }
-        }
-    }
-    
-    return NO;
+static NSString *const kAISummaryInlineExpanderId = @"id.elements.inline_expander";
+static NSString *const kAISummaryMetadataRowId = @"eml.expandable_metadata";
+static NSString *const kAISummaryInlineElementPrefix = @"id.elements.inlin";
+
+static const NSInteger kAISummarySearchDepth = 8;
+static const NSInteger kAISummaryRowSearchDepth = 5;
+
+static BOOL isASDisplayView(UIView *view) {
+    return [NSStringFromClass([view class]) isEqualToString:@"_ASDisplayView"];
 }
 
-// Hide AI Summaries using ASCollectionView sizeForElement hook
-%hook ASCollectionView
-- (CGSize)sizeForElement:(id)element {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return %orig;
-    }
-    
-    // Get node and controller from element
-    if (!element || ![element respondsToSelector:@selector(node)]) {
-        return %orig;
-    }
-    
-    id node = [element performSelector:@selector(node)];
-    if (!node || ![node respondsToSelector:@selector(controller)]) {
-        return %orig;
-    }
-    
-    id nodeController = [node performSelector:@selector(controller)];
-    if (!nodeController) {
-        return %orig;
-    }
-    
-    // Search for summary identifiers in node hierarchy
-    NSArray *summaryIdentifiers = @[
-        @"summary",
-        @"ai_summary",
-        @"video_summary",
-        @"gemini",
-        @"summary_button",
-        @"summary_card",
-        @"summary.eml",
-        @"video_summary_card",
-        @"gemini_summary"
-    ];
-    
-    if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
-        // Return zero size to prevent rendering
-        return CGSizeZero;
-    }
-    
-    return %orig;
-}
-%end
-
-// Remove summary cells from collection view
-%hook YTAsyncCollectionView
-- (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = %orig;
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return cell;
-    }
-    
-    // Check _ASCollectionViewCell for summary accessibility identifiers
-    Class ASCollectionViewCellClass = objc_lookUpClass("_ASCollectionViewCell");
-    if (ASCollectionViewCellClass && [cell isKindOfClass:ASCollectionViewCellClass]) {
-        if ([cell respondsToSelector:@selector(node)]) {
-            id node = [cell performSelector:@selector(node)];
-            
-            // Check top-level accessibility identifier
-            if (node && [node respondsToSelector:@selector(accessibilityIdentifier)]) {
-                NSString *identifier = [node accessibilityIdentifier];
-                
-                // Check for summary-related identifiers
-                NSArray *summaryIdentifiers = @[
-                    @"summary",
-                    @"ai_summary",
-                    @"video_summary",
-                    @"gemini",
-                    @"summary_button",
-                    @"summary_card",
-                    @"summary_shelf",
-                    @"video_summary_card",
-                    @"gemini_summary"
-                ];
-                
-                for (NSString *summaryId in summaryIdentifiers) {
-                    if (identifier && [identifier containsString:summaryId]) {
-                        id selfId = (id)self;
-                        [selfId performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
-                        return cell;
-                    }
-                }
-            }
-            
-            // Search deeper in node hierarchy
-            if (node && [node respondsToSelector:@selector(controller)]) {
-                id nodeController = [node performSelector:@selector(controller)];
-                NSArray *summaryIdentifiers = @[
-                    @"summary",
-                    @"ai_summary",
-                    @"video_summary",
-                    @"gemini",
-                    @"summary_button",
-                    @"summary_card",
-                    @"summary.eml",
-                    @"video_summary_card",
-                    @"gemini_summary"
-                ];
-                
-                if (findSummaryInNodeController(nodeController, summaryIdentifiers)) {
-                    id selfId = (id)self;
-                    [selfId performSelector:@selector(removeCellsAtIndexPath:) withObject:indexPath];
-                    return cell;
-                }
-            }
+static void collectViewsWithIdentifierPrefix(UIView *root, NSString *prefix, NSInteger maxDepth, NSMutableArray *out) {
+    if (!root || maxDepth <= 0) return;
+    for (UIView *subview in root.subviews) {
+        NSString *identifier = subview.accessibilityIdentifier;
+        if (identifier.length && [identifier hasPrefix:prefix]) {
+            [out addObject:subview];
         }
-    }
-    
-    return cell;
-}
-
-%new(v)
-- (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath {
-    id selfId = (id)self;
-    [selfId performSelector:@selector(deleteItemsAtIndexPaths:) withObject:@[indexPath]];
-}
-%end
-
-// Hide AI Summaries (Fallback) - Look for sparkle/star icon (✨) and Summary text in views
-static BOOL containsSparkleOrSummary(UIView *view) {
-    // Check if view contains sparkle character or "Summary" text
-    if ([view isKindOfClass:[UILabel class]]) {
-        UILabel *label = (UILabel *)view;
-        if (label.text) {
-            // Check for sparkle character (✨) or "Summary" text
-            NSString *text = label.text;
-            if ([text containsString:@"✨"] || 
-                [text containsString:@"✧"] ||
-                [text containsString:@"✦"] ||
-                [text containsString:@" sparkle"] ||
-                [text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                return YES;
-            }
-        }
-    }
-    
-    // Check UIImageView for sparkle icon
-    if ([view isKindOfClass:[UIImageView class]]) {
-        UIImageView *imageView = (UIImageView *)view;
-        // Check image description
-        NSString *imageDesc = [imageView.image description];
-        if (imageDesc && ([imageDesc containsString:@"sparkle"] || 
-                          [imageDesc containsString:@"star"] ||
-                          [imageDesc containsString:@"magic"] ||
-                          [imageDesc containsString:@"wand"])) {
-            return YES;
-        }
-        // Also check if it's a small icon (sparkle icons are typically small)
-        if (imageView.frame.size.width < 30 && imageView.frame.size.height < 30 && imageView.image) {
-            // Could be a sparkle icon - check if nearby views have "Summary"
-            UIView *parent = imageView.superview;
-            if (parent) {
-                for (UIView *sibling in parent.subviews) {
-                    if ([sibling isKindOfClass:[UILabel class]]) {
-                        UILabel *siblingLabel = (UILabel *)sibling;
-                        if (siblingLabel.text && [siblingLabel.text rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                            return YES;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    // Check accessibility label
-    if (view.accessibilityLabel) {
-        NSString *accLabel = view.accessibilityLabel;
-        if ([accLabel containsString:@"✨"] ||
-            [accLabel containsString:@"✧"] ||
-            [accLabel containsString:@"✦"] ||
-            [accLabel rangeOfString:@"Summary" options:NSCaseInsensitiveSearch].location != NSNotFound ||
-            [accLabel containsString:@"sparkle"] ||
-            [accLabel containsString:@"gemini"]) {
-            return YES;
-        }
-    }
-    
-    // Check accessibility identifier
-    if (view.accessibilityIdentifier) {
-        NSString *accId = view.accessibilityIdentifier;
-        if ([accId rangeOfString:@"summary" options:NSCaseInsensitiveSearch].location != NSNotFound ||
-            [accId containsString:@"gemini"] ||
-            [accId containsString:@"ai_summary"]) {
-            return YES;
-        }
-    }
-    
-    return NO;
-}
-
-static void hideSummaryViewsInView(UIView *view) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hideAISummaries_enabled"]) {
-        return;
-    }
-    
-    // Search for views containing sparkle icon or "Summary" text
-    for (UIView *subview in view.subviews) {
-        if (containsSparkleOrSummary(subview)) {
-            // Found sparkle icon or Summary text - hide the parent container
-            UIView *container = subview.superview;
-            int levelsUp = 0;
-            // Go up to find the actual button/card container
-            while (container && container != view && levelsUp < 6) {
-                // Check if this looks like a button or card container
-                if ([container isKindOfClass:[UIButton class]] || 
-                    container.backgroundColor || 
-                    container.layer.cornerRadius > 0 ||
-                    container.frame.size.height > 25) { // Likely the summary card/button
-                    container.hidden = YES;
-                    // Collapse the view by setting height to 0
-                    CGRect frame = container.frame;
-                    frame.size.height = 0;
-                    container.frame = frame;
-                    break;
-                }
-                container = container.superview;
-                levelsUp++;
-            }
-            // Fallback: hide immediate parent if we didn't find a specific container
-            if (levelsUp >= 6 && subview.superview) {
-                subview.superview.hidden = YES;
-                CGRect frame = subview.superview.frame;
-                frame.size.height = 0;
-                subview.superview.frame = frame;
-            }
-        }
-        
-        // Also check if this view itself should be hidden
-        if (containsSparkleOrSummary(subview)) {
-            // Check siblings for "Summary" text if we found a sparkle icon
-            UIView *parent = subview.superview;
-            if (parent) {
-                for (UIView *sibling in parent.subviews) {
-                    if (sibling != subview && containsSparkleOrSummary(sibling)) {
-                        // Found both sparkle and summary in same container - hide it
-                        parent.hidden = YES;
-                        CGRect frame = parent.frame;
-                        frame.size.height = 0;
-                        parent.frame = frame;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        // Recursively check subviews (limit depth to avoid performance issues)
-        if (subview.subviews.count > 0 && subview.subviews.count < 50) {
-            hideSummaryViewsInView(subview);
-        }
+        collectViewsWithIdentifierPrefix(subview, prefix, maxDepth - 1, out);
     }
 }
 
-// Hook collection view cells to hide summary views after layout
-%hook UICollectionViewCell
+static UIView *inlineInnerDisplayView(UIView *metadataRow) {
+    NSMutableArray *inlineEls = [NSMutableArray array];
+    collectViewsWithIdentifierPrefix(metadataRow, kAISummaryInlineElementPrefix, kAISummaryRowSearchDepth, inlineEls);
+    for (UIView *inlineEl in inlineEls) {
+        for (UIView *subview in inlineEl.subviews) {
+            if (isASDisplayView(subview)) return subview;
+        }
+    }
+    return nil;
+}
+
+static void removeViewIfAttached(UIView *view) {
+    if (view.superview) [view removeFromSuperview];
+}
+
+static void hideAISummaryViewsInCell(UIView *cell) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hideAISummaries_enabled"]) return;
+
+    NSMutableArray *expanders = [NSMutableArray array];
+    collectViewsWithIdentifierPrefix(cell, kAISummaryInlineExpanderId, kAISummarySearchDepth, expanders);
+    for (UIView *view in expanders) {
+        removeViewIfAttached(view);
+    }
+
+    NSMutableArray *metadataRows = [NSMutableArray array];
+    collectViewsWithIdentifierPrefix(cell, kAISummaryMetadataRowId, kAISummarySearchDepth, metadataRows);
+    for (UIView *row in metadataRows) {
+        UIView *inner = inlineInnerDisplayView(row);
+        if (inner) {
+            removeViewIfAttached(inner);
+        } else {
+            for (UIView *subview in [row.subviews copy]) {
+                if (isASDisplayView(subview)) removeViewIfAttached(subview);
+            }
+        }
+        removeViewIfAttached(row);
+    }
+}
+
+%hook _ASCollectionViewCell
 - (void)layoutSubviews {
     %orig;
-    hideSummaryViewsInView(self);
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hideAISummaries_enabled"]) return;
+
+    __weak UIView *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (weakSelf) hideAISummaryViewsInCell(weakSelf);
+    });
 }
 %end
 
