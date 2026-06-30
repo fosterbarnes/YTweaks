@@ -42,7 +42,8 @@ NSBundle *YTWKSBundle() {
 - (NSArray <NSNumber *> *)orderedCategories {
     if (self.type != 1 || class_getClassMethod(objc_getClass("YTSettingsGroupData"), @selector(tweaks)))
         return %orig;
-    NSMutableArray *mutableCategories = %orig.mutableCopy;
+    NSArray *categories = %orig;
+    NSMutableArray *mutableCategories = categories.mutableCopy;
     // Check if YTWKSSection already exists to avoid duplicates
     NSNumber *sectionNumber = @(YTWKSSection);
     if (![mutableCategories containsObject:sectionNumber]) {
