@@ -2,12 +2,15 @@
 "WARNING" = "Varning";
 "APPLY_DESC" = "Denna åtgärd avslutar YouTube. Är du säker på att du vill fortsätta?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Tvinga helskärmsriktning";
-"FULLSCREEN_MODE_DESC" = "Gå alltid in i helskärm med hemmaknappen/-fältet till vänster eller höger.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Av";
 "FULLSCREEN_LEFT" = "Vänster";
 "FULLSCREEN_RIGHT" = "Höger";
+"FULLSCREEN_PORTRAIT" = "Stående";
+"FULLSCREEN_BUTTON_MODE" = "Tvinga helskärmsriktning (Knapp)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Endast helskärmsknappen går in i vald orientering. Svep och rotation behåller standardbeteendet.";
+"FULLSCREEN_SWIPE_MODE" = "Tvinga helskärmsriktning (Gester)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Endast svep-upp-gesten går in i vald orientering. Helskärmsknappen och rotation behåller standardbeteendet.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Inaktivera flytande minispelare";

@@ -2,12 +2,15 @@
 "WARNING" = "चेतावनी";
 "APPLY_DESC" = "इस क्रिया से YouTube बंद हो जाएगा। क्या आप जारी रखना चाहते हैं?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "फ़ुलस्क्रीन दिशा बल दें";
-"FULLSCREEN_MODE_DESC" = "होम बटन/बार बाएं या दाएं रखकर हमेशा फ़ुलस्क्रीन में प्रवेश करें।";
+// Fullscreen
 "FULLSCREEN_OFF" = "बंद";
 "FULLSCREEN_LEFT" = "बाएं";
 "FULLSCREEN_RIGHT" = "दाएं";
+"FULLSCREEN_PORTRAIT" = "पोर्ट्रेट";
+"FULLSCREEN_BUTTON_MODE" = "फ़ुलस्क्रीन दिशा बल दें (बटन)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "केवल फ़ुलस्क्रीन बटन चुनी गई दिशा में प्रवेश करता है। स्वाइप और रोटेशन डिफ़ॉल्ट व्यवहार रखते हैं।";
+"FULLSCREEN_SWIPE_MODE" = "फ़ुलस्क्रीन दिशा बल दें (जेस्चर)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "केवल ऊपर स्वाइप जेस्चर चुनी गई दिशा में प्रवेश करता है। फ़ुलस्क्रीन बटन और रोटेशन डिफ़ॉल्ट व्यवहार रखते हैं।";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "फ़्लोटिंग मिनीप्लेयर बंद करें";

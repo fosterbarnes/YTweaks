@@ -2,12 +2,15 @@
 "WARNING" = "警告";
 "APPLY_DESC" = "执行此操作需要关闭 YouTube，是否继续？";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "强制全屏方向";
-"FULLSCREEN_MODE_DESC" = "始终以主屏幕按钮/栏在左侧或右侧的方式进入全屏。";
+// Fullscreen
 "FULLSCREEN_OFF" = "关";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
+"FULLSCREEN_PORTRAIT" = "竖屏";
+"FULLSCREEN_BUTTON_MODE" = "强制全屏方向 (按钮)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "仅全屏按钮会以选择的方向进入。滑动手势和旋转保持默认行为。";
+"FULLSCREEN_SWIPE_MODE" = "强制全屏方向 (手势)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "仅向上滑动手势会以选择的方向进入。全屏按钮和旋转保持默认行为。";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "禁用浮动迷你播放器";

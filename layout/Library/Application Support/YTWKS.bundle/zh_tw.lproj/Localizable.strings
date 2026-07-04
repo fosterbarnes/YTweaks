@@ -2,12 +2,15 @@
 "WARNING" = "警告";
 "APPLY_DESC" = "需要重新啟動 Youtube，是否繼續？";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "強制全螢幕方向";
-"FULLSCREEN_MODE_DESC" = "始終以主畫面按鈕/列在左側或右側的方式進入全螢幕。";
+// Fullscreen
 "FULLSCREEN_OFF" = "關";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
+"FULLSCREEN_PORTRAIT" = "直向";
+"FULLSCREEN_BUTTON_MODE" = "強制全螢幕方向 (按鈕)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "僅全螢幕按鈕會以選擇的方向進入。滑動手勢和旋轉保持預設行為。";
+"FULLSCREEN_SWIPE_MODE" = "強制全螢幕方向 (手勢)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "僅向上滑動手勢會以選擇的方向進入。全螢幕按鈕和旋轉保持預設行為。";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "停用浮動迷你播放器";

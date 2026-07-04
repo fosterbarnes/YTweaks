@@ -2,12 +2,15 @@
 "WARNING" = "Figyelem";
 "APPLY_DESC" = "Ez a művelet kilépteti a YouTube-ot. Biztosan folytatni szeretné?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Teljes képernyő irányának kényszerítése";
-"FULLSCREEN_MODE_DESC" = "Mindig bal vagy jobb oldalon legyen a kezdőlap gomb/sáv, amikor teljes képernyős módba lép.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Ki";
 "FULLSCREEN_LEFT" = "Bal";
 "FULLSCREEN_RIGHT" = "Jobb";
+"FULLSCREEN_PORTRAIT" = "Álló";
+"FULLSCREEN_BUTTON_MODE" = "Teljes képernyő irányának kényszerítése (Gomb)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Csak a teljes képernyő gomb lép be a választott irányba. A gesztusok és forgatás az alapértelmezett viselkedést tartják.";
+"FULLSCREEN_SWIPE_MODE" = "Teljes képernyő irányának kényszerítése (Gesztus)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Csak a felfelé suhintó gesztus lép be a választott irányba. A teljes képernyő gomb és forgatás az alapértelmezett viselkedést tartja.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Lebegő minilejátszó kikapcsolása";

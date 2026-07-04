@@ -2,12 +2,15 @@
 "WARNING" = "تحذير";
 "APPLY_DESC" = "سيؤدي هذا الإجراء إلى إغلاق التطبيق. هل أنت متأكد أنك تَوَد الاستمرار؟";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "فرض اتجاه ملء الشاشة";
-"FULLSCREEN_MODE_DESC" = "دخول وضع ملء الشاشة دائماً مع زر/شريط الصفحة الرئيسية على الجانب الأيسر أو الأيمن.";
+// Fullscreen
 "FULLSCREEN_OFF" = "إيقاف";
 "FULLSCREEN_LEFT" = "يسار";
 "FULLSCREEN_RIGHT" = "يمين";
+"FULLSCREEN_PORTRAIT" = "عمودي";
+"FULLSCREEN_BUTTON_MODE" = "فرض اتجاه ملء الشاشة (زر)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "زر ملء الشاشة فقط يدخل الاتجاه المختار. الإيماءات والتدوير يحافظان على السلوك الافتراضي.";
+"FULLSCREEN_SWIPE_MODE" = "فرض اتجاه ملء الشاشة (إيماءة)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "إيماءة السحب لأعلى فقط تدخل الاتجاه المختار. زر ملء الشاشة والتدوير يحافظان على السلوك الافتراضي.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "تعطيل مشغل مصغر عائم";

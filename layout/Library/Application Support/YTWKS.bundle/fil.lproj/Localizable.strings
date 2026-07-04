@@ -2,12 +2,15 @@
 "WARNING" = "Babala";
 "APPLY_DESC" = "Isasara ng aksyong ito ang YouTube. Sigurado ka bang gusto mong magpatuloy?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Pilitin ang Direksyon ng Full Screen";
-"FULLSCREEN_MODE_DESC" = "Laging pumasok sa full screen na naka-home button/bar sa kaliwa o kanan.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Off";
 "FULLSCREEN_LEFT" = "Kaliwa";
 "FULLSCREEN_RIGHT" = "Kanan";
+"FULLSCREEN_PORTRAIT" = "Portrait";
+"FULLSCREEN_BUTTON_MODE" = "Pilitin ang Direksyon ng Full Screen (Button)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Ang full screen button lang ang papasok sa napiling orientation. Ang mga swipe at rotation ay nananatiling default.";
+"FULLSCREEN_SWIPE_MODE" = "Pilitin ang Direksyon ng Full Screen (Gesture)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Ang swipe pataas lang ang papasok sa napiling orientation. Ang full screen button at rotation ay nananatiling default.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "I-disable ang Floating Mini Player";

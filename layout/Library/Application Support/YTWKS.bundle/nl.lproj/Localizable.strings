@@ -2,12 +2,15 @@
 "WARNING" = "Waarschuwing";
 "APPLY_DESC" = "Deze actie sluit YouTube af. Weet je zeker dat je door wilt gaan?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Volledig-schermrichting forceren";
-"FULLSCREEN_MODE_DESC" = "Ga altijd naar volledig scherm met de startknop/-balk links of rechts.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Uit";
 "FULLSCREEN_LEFT" = "Links";
 "FULLSCREEN_RIGHT" = "Rechts";
+"FULLSCREEN_PORTRAIT" = "Staand";
+"FULLSCREEN_BUTTON_MODE" = "Volledig-schermrichting forceren (Knop)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Alleen de volledig-schermknop gaat naar de gekozen oriëntatie. Veegbewegingen en rotatie behouden standaardgedrag.";
+"FULLSCREEN_SWIPE_MODE" = "Volledig-schermrichting forceren (Gebaar)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Alleen het veeg-gebaar omhoog gaat naar de gekozen oriëntatie. De volledig-schermknop en rotatie behouden standaardgedrag.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Zwevende miniplayer uitschakelen";

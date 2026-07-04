@@ -2,12 +2,15 @@
 "WARNING" = "경고";
 "APPLY_DESC" = "이 작업은 YouTube를 종료합니다. 계속하시겠습니까?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "전체 화면 방향 강제";
-"FULLSCREEN_MODE_DESC" = "홈 버튼/바가 왼쪽 또는 오른쪽에 오도록 항상 전체 화면으로 들어갑니다.";
+// Fullscreen
 "FULLSCREEN_OFF" = "끔";
 "FULLSCREEN_LEFT" = "왼쪽";
 "FULLSCREEN_RIGHT" = "오른쪽";
+"FULLSCREEN_PORTRAIT" = "세로";
+"FULLSCREEN_BUTTON_MODE" = "전체 화면 방향 강제 (버튼)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "전체 화면 버튼만 선택한 방향으로 들어갑니다. 스와이프와 회전은 기본 동작을 유지합니다.";
+"FULLSCREEN_SWIPE_MODE" = "전체 화면 방향 강제 (제스처)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "위로 스와이프하는 제스처만 선택한 방향으로 들어갑니다. 전체 화면 버튼과 회전은 기본 동작을 유지합니다.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "플로팅 미니 플레이어 비활성화";

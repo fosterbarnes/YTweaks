@@ -2,12 +2,15 @@
 "WARNING" = "警告";
 "APPLY_DESC" = "この操作によりYouTubeアプリが終了します。本当に続けますか？";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "フルスクリーン方向を強制";
-"FULLSCREEN_MODE_DESC" = "常にホームボタン/バーが左または右側になるようにフルスクリーンに入ります。";
+// Fullscreen
 "FULLSCREEN_OFF" = "オフ";
 "FULLSCREEN_LEFT" = "左";
 "FULLSCREEN_RIGHT" = "右";
+"FULLSCREEN_PORTRAIT" = "縦";
+"FULLSCREEN_BUTTON_MODE" = "フルスクリーン方向を強制（ボタン）";
+"FULLSCREEN_BUTTON_MODE_DESC" = "フルスクリーンボタンのみが選択した向きで入ります。スワイプと回転はデフォルトの動作のままです。";
+"FULLSCREEN_SWIPE_MODE" = "フルスクリーン方向を強制（ジェスチャー）";
+"FULLSCREEN_SWIPE_MODE_DESC" = "上にスワイプするジェスチャーのみが選択した向きで入ります。フルスクリーンボタンと回転はデフォルトの動作のままです。";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "フローティングミニプレーヤーを無効化";

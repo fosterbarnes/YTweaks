@@ -2,12 +2,15 @@
 "WARNING" = "Warnung";
 "APPLY_DESC" = "Diese Aktion wird YouTube beenden. Sind Sie sicher, dass Sie fortfahren möchten?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Vollbild-Richtung erzwingen";
-"FULLSCREEN_MODE_DESC" = "Immer mit Home-Button/-Leiste links oder rechts ins Vollbild wechseln.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Aus";
 "FULLSCREEN_LEFT" = "Links";
 "FULLSCREEN_RIGHT" = "Rechts";
+"FULLSCREEN_PORTRAIT" = "Hochformat";
+"FULLSCREEN_BUTTON_MODE" = "Vollbild-Richtung erzwingen (Button)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Nur der Vollbild-Button wechselt in die gewählte Ausrichtung. Wischen und Drehen behalten das Standardverhalten.";
+"FULLSCREEN_SWIPE_MODE" = "Vollbild-Richtung erzwingen (Geste)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Nur die Wisch-nach-oben-Geste wechselt in die gewählte Ausrichtung. Vollbild-Button und Drehen behalten das Standardverhalten.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Schwebenden Miniplayer deaktivieren";

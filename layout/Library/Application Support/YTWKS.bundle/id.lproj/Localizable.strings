@@ -2,12 +2,15 @@
 "WARNING" = "Peringatan";
 "APPLY_DESC" = "Tindakan ini akan menutup YouTube. Apakah Anda yakin ingin melanjutkan?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Paksa Arah Layar Penuh";
-"FULLSCREEN_MODE_DESC" = "Selalu masuk ke layar penuh dengan tombol/bar beranda di sisi kiri atau kanan.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Mati";
 "FULLSCREEN_LEFT" = "Kiri";
 "FULLSCREEN_RIGHT" = "Kanan";
+"FULLSCREEN_PORTRAIT" = "Potret";
+"FULLSCREEN_BUTTON_MODE" = "Paksa Arah Layar Penuh (Tombol)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Hanya tombol layar penuh yang masuk ke orientasi yang dipilih. Gesekan dan rotasi tetap perilaku default.";
+"FULLSCREEN_SWIPE_MODE" = "Paksa Arah Layar Penuh (Gestur)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Hanya gestur geser ke atas yang masuk ke orientasi yang dipilih. Tombol layar penuh dan rotasi tetap perilaku default.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Nonaktifkan miniplayer mengambang";

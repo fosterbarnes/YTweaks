@@ -4,6 +4,10 @@
 #import <YouTubeHeader/YTGlobalConfig.h>
 #import <YouTubeHeader/YTColdConfig.h>
 #import <YouTubeHeader/YTHotConfig.h>
+#import <YouTubeHeader/YTPlayerViewController.h>
+#import <YouTubeHeader/YTMainAppVideoPlayerOverlayViewController.h>
+#import <YouTubeHeader/YTPlayerOverlayManager.h>
+#import <YouTubeHeader/YTWatchController.h>
 
 // Forward declarations
 @class YTWatchViewController;
@@ -189,20 +193,113 @@ static void hookClass(NSObject *instance) {
 
 %end
 
-// Fullscreen Mode (iPhone-Exclusive) - @arichornlover & @bhackel
-// WARNING: Please turn off any "Portrait Fullscreen" or "iPad Layout" Options while Fullscreen Mode is enabled.
-// fullscreen_mode: 0 = Off, 1 = Left, 2 = Right
+// Fullscreen direction (iPhone-Exclusive) - @arichornlover & @bhackel
+// fullscreen_button_mode / fullscreen_swipe_mode: 0 = Off, 1 = Left, 2 = Right, 3 = Portrait
+// Button: didPressToggleFullscreen (PVC + overlay manager). Swipe: showFullScreen when button flag unset.
+
+static const NSTimeInterval kYTWKSFullscreenPendingDuration = 0.5;
+
+static BOOL gButtonFullscreenPending = NO;
+static BOOL gSwipeFullscreenPending = NO;
+
+static UIInterfaceOrientationMask YTWKSFullscreenMaskForMode(NSInteger mode) {
+    if (mode == 1) return UIInterfaceOrientationMaskLandscapeLeft;
+    if (mode == 2) return UIInterfaceOrientationMaskLandscapeRight;
+    if (mode == 3) return UIInterfaceOrientationMaskPortrait;
+    return 0;
+}
+
+static void YTWKSActivatePendingFlag(BOOL *pendingFlag) {
+    *pendingFlag = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kYTWKSFullscreenPendingDuration * NSEC_PER_SEC)),
+        dispatch_get_main_queue(), ^{ *pendingFlag = NO; });
+}
+
+static BOOL YTWKSIsEnteringFullscreen(YTPlayerViewController *player) {
+    if (!player) return YES;
+    id overlay = [player activeVideoPlayerOverlay];
+    if (overlay && [overlay respondsToSelector:@selector(isFullscreen)]) {
+        return ![(YTMainAppVideoPlayerOverlayViewController *)overlay isFullscreen];
+    }
+    return YES;
+}
+
+static YTPlayerViewController *YTWKSPlayerFromOverlayManager(YTPlayerOverlayManager *manager) {
+    @try {
+        id player = [manager valueForKey:@"_playerViewController"];
+        if (!player) player = [manager valueForKey:@"playerViewController"];
+        return player;
+    } @catch (id ex) {
+        return nil;
+    }
+}
+
+static void YTWKSBeginScopedFullscreen(YTPlayerViewController *player, NSString *prefKey, BOOL *pendingFlag) {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    if ([prefs integerForKey:prefKey] == 0) return;
+    if (!YTWKSIsEnteringFullscreen(player)) return;
+    YTWKSActivatePendingFlag(pendingFlag);
+}
+
+static void YTWKSBeginSwipeFullscreenFromShowFullScreen(void) {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    if ([prefs integerForKey:@"fullscreen_swipe_mode"] == 0) return;
+    if (gButtonFullscreenPending) return;
+    YTWKSActivatePendingFlag(&gSwipeFullscreenPending);
+}
+
+static void YTWKSMigrateLegacyFullscreenMode(void) {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSInteger global = [prefs integerForKey:@"fullscreen_mode"];
+    if (global == 0) return;
+
+    if ([prefs integerForKey:@"fullscreen_button_mode"] == 0)
+        [prefs setInteger:global forKey:@"fullscreen_button_mode"];
+    if ([prefs integerForKey:@"fullscreen_swipe_mode"] == 0)
+        [prefs setInteger:global forKey:@"fullscreen_swipe_mode"];
+    [prefs removeObjectForKey:@"fullscreen_mode"];
+    [prefs synchronize];
+}
+
 %hook YTWatchViewController
 - (UIInterfaceOrientationMask)allowedFullScreenOrientations {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger fullscreenMode = [defaults integerForKey:@"fullscreen_mode"];
-    if (fullscreenMode == 1) {
-        return UIInterfaceOrientationMaskLandscapeLeft;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    UIInterfaceOrientationMask forced = 0;
+
+    if (gButtonFullscreenPending) {
+        forced = YTWKSFullscreenMaskForMode([prefs integerForKey:@"fullscreen_button_mode"]);
+        if (forced) return forced;
     }
-    if (fullscreenMode == 2) {
-        return UIInterfaceOrientationMaskLandscapeRight;
+    if (gSwipeFullscreenPending) {
+        forced = YTWKSFullscreenMaskForMode([prefs integerForKey:@"fullscreen_swipe_mode"]);
+        if (forced) return forced;
     }
     return %orig;
+}
+%end
+
+%hook YTPlayerViewController
+- (void)didPressToggleFullscreen {
+    YTWKSBeginScopedFullscreen(self, @"fullscreen_button_mode", &gButtonFullscreenPending);
+    %orig;
+}
+- (void)didSwipeToEnterFullscreen {
+    YTWKSBeginScopedFullscreen(self, @"fullscreen_swipe_mode", &gSwipeFullscreenPending);
+    %orig;
+}
+%end
+
+%hook YTPlayerOverlayManager
+- (void)didPressToggleFullscreen {
+    YTWKSBeginScopedFullscreen(YTWKSPlayerFromOverlayManager(self), @"fullscreen_button_mode", &gButtonFullscreenPending);
+    %orig;
+}
+%end
+
+%hook YTWatchController
+- (void)showFullScreen {
+    YTWKSBeginSwipeFullscreenFromShowFullScreen();
+    %orig;
 }
 %end
 
@@ -421,6 +518,8 @@ static void hideAISummaryViewsInCell(UIView *cell) {
     
     // Initialize A/B config cache
     abConfigCache = [NSMutableDictionary new];
+
+    YTWKSMigrateLegacyFullscreenMode();
     
     %init;
 }

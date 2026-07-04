@@ -2,12 +2,15 @@
 "WARNING" = "Avertissement";
 "APPLY_DESC" = "Cette action va quitter YouTube. Voulez-vous vraiment continuer ?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Forcer la direction du plein écran";
-"FULLSCREEN_MODE_DESC" = "Toujours passer en plein écran avec le bouton/barre d'accueil à gauche ou à droite.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Désactivé";
 "FULLSCREEN_LEFT" = "Gauche";
 "FULLSCREEN_RIGHT" = "Droite";
+"FULLSCREEN_PORTRAIT" = "Portrait";
+"FULLSCREEN_BUTTON_MODE" = "Forcer la direction plein écran (Bouton)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Seul le bouton plein écran utilise l'orientation choisie. Les gestes et la rotation conservent le comportement par défaut.";
+"FULLSCREEN_SWIPE_MODE" = "Forcer la direction plein écran (Geste)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Seul le geste de balayage vers le haut utilise l'orientation choisie. Le bouton plein écran et la rotation conservent le comportement par défaut.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Désactiver le mini lecteur flottant";

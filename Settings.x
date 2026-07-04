@@ -25,6 +25,16 @@ static const NSInteger YTWKSSection = 'ytwk'; // For YouGroupSettings
 - (void)restoreDefaults;
 @end
 
+@interface YTSettingsCell (YTweaks)
+- (BOOL)YTWKS_layoutFullscreenDirectionSegmentWithIdentifier:(NSString *)identifier
+                                                         tag:(NSInteger)tag
+                                                     prefKey:(NSString *)prefKey
+                                                      action:(SEL)action;
+- (void)nightModeSegmentChanged:(UISegmentedControl *)sender;
+- (void)fullscreenButtonModeSegmentChanged:(UISegmentedControl *)sender;
+- (void)fullscreenSwipeModeSegmentChanged:(UISegmentedControl *)sender;
+@end
+
 NSUserDefaults *defaults;
 
 NSBundle *YTWKSBundle() {
@@ -150,16 +160,27 @@ NSBundle *YTWKSBundle() {
         }];
     [sectionItems addObject:restoreDefaults];
 
-    // Fullscreen Mode with segmented control (Off | Left | Right)
-    // Level 0 = Off, 1 = Left, 2 = Right
-    YTSettingsSectionItem *fullscreenMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"FULLSCREEN_MODE")
-        titleDescription:LOC(@"FULLSCREEN_MODE_DESC")
-        accessibilityIdentifier:@"fullscreenModeSegment"
+    // Fullscreen Button Mode with segmented control (Off | Left | Right | Portrait)
+    // Level 0 = Off, 1 = Left, 2 = Right, 3 = Portrait
+    YTSettingsSectionItem *fullscreenButtonMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"FULLSCREEN_BUTTON_MODE")
+        titleDescription:LOC(@"FULLSCREEN_BUTTON_MODE_DESC")
+        accessibilityIdentifier:@"fullscreenButtonModeSegment"
         detailTextBlock:nil
         selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
-            return NO; // Non-interactive - segmented control handles selection
+            return NO;
         }];
-    [sectionItems addObject:fullscreenMode];
+    [sectionItems addObject:fullscreenButtonMode];
+
+    // Fullscreen Gesture Mode with segmented control (Off | Left | Right | Portrait)
+    // Level 0 = Off, 1 = Left, 2 = Right, 3 = Portrait
+    YTSettingsSectionItem *fullscreenSwipeMode = [YTSettingsSectionItemClass itemWithTitle:LOC(@"FULLSCREEN_SWIPE_MODE")
+        titleDescription:LOC(@"FULLSCREEN_SWIPE_MODE_DESC")
+        accessibilityIdentifier:@"fullscreenSwipeModeSegment"
+        detailTextBlock:nil
+        selectBlock:^BOOL (YTSettingsCell *cell, NSUInteger arg1) {
+            return NO;
+        }];
+    [sectionItems addObject:fullscreenSwipeMode];
 
     // Night Mode with segmented control (Off | Low | Medium | High | Maximum)
     // Level 0 = Off, 1 = Low (0.3), 2 = Medium (0.5), 3 = High (0.7), 4 = Maximum (0.9)
@@ -231,7 +252,7 @@ NSBundle *YTWKSBundle() {
     [sectionItems addObject:hideAISummaries];
 
     // Version number footer (at the bottom)
-    #define TWEAK_VERSION 0.5.0
+    #define TWEAK_VERSION 0.6.0
     #define STRINGIFY(x) #x
     #define TOSTRING(x) STRINGIFY(x)
     NSString *versionString = [NSString stringWithFormat:@"YTweaks v%s", TOSTRING(TWEAK_VERSION)];
@@ -281,7 +302,7 @@ NSBundle *YTWKSBundle() {
     // Filter only YTweaks keys
     NSMutableDictionary *ytweaksPrefs = [NSMutableDictionary dictionary];
     for (NSString *key in prefs) {
-        if ([key hasPrefix:@"fullscreen_mode"] || 
+        if ([key hasPrefix:@"fullscreen_"] ||
             [key hasPrefix:@"enable"] ||
             [key hasPrefix:@"virtualBezel"] ||
             [key hasPrefix:@"hideAISummaries"] ||
@@ -355,7 +376,8 @@ NSBundle *YTWKSBundle() {
 
 %new
 - (void)restoreDefaults {
-    NSArray *keys = @[@"fullscreen_mode", 
+    NSArray *keys = @[@"fullscreen_button_mode",
+                      @"fullscreen_swipe_mode",
                       @"enableIosFloatingMiniplayer",
                       @"virtualBezel_enabled",
                       @"hideAISummaries_enabled",
@@ -430,48 +452,17 @@ NSBundle *YTWKSBundle() {
         return;
     }
     
-    // Fullscreen Mode segmented control (Off | Left | Right)
-    if ([self.accessibilityIdentifier isEqualToString:@"fullscreenModeSegment"]) {
-        UISegmentedControl *segment = [self.contentView viewWithTag:888889];
-        if (!segment) {
-            NSArray *items = @[
-                [bundle localizedStringForKey:@"FULLSCREEN_OFF" value:@"Off" table:nil],
-                [bundle localizedStringForKey:@"FULLSCREEN_LEFT" value:@"Left" table:nil],
-                [bundle localizedStringForKey:@"FULLSCREEN_RIGHT" value:@"Right" table:nil]
-            ];
-            segment = [[UISegmentedControl alloc] initWithItems:items];
-            segment.tag = 888889;
-            segment.selectedSegmentIndex = [defaults integerForKey:@"fullscreen_mode"];
-            [segment addTarget:self action:@selector(fullscreenModeSegmentChanged:) forControlEvents:UIControlEventValueChanged];
-            
-            segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-            if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
-                [segment respondsToSelector:tintSelector]) {
-                UIColor *tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-                ((void (*)(id, SEL, id))objc_msgSend)(segment, tintSelector, tintColor);
-            }
-            [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
-            [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
-            
-            UIFont *font = [UIFont systemFontOfSize:13.0 weight:UIFontWeightMedium];
-            [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
-            [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
-            
-            segment.translatesAutoresizingMaskIntoConstraints = NO;
-            [self.contentView addSubview:segment];
-            
-            [NSLayoutConstraint activateConstraints:@[
-                [segment.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
-                [segment.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16],
-                [segment.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-12],
-                [segment.heightAnchor constraintEqualToConstant:32]
-            ]];
-        } else {
-            NSInteger currentMode = [defaults integerForKey:@"fullscreen_mode"];
-            if (segment.selectedSegmentIndex != currentMode) {
-                segment.selectedSegmentIndex = currentMode;
-            }
-        }
+    if ([self YTWKS_layoutFullscreenDirectionSegmentWithIdentifier:@"fullscreenButtonModeSegment"
+                                                               tag:888887
+                                                           prefKey:@"fullscreen_button_mode"
+                                                            action:@selector(fullscreenButtonModeSegmentChanged:)]) {
+        return;
+    }
+
+    if ([self YTWKS_layoutFullscreenDirectionSegmentWithIdentifier:@"fullscreenSwipeModeSegment"
+                                                               tag:888886
+                                                           prefKey:@"fullscreen_swipe_mode"
+                                                            action:@selector(fullscreenSwipeModeSegmentChanged:)]) {
         return;
     }
     
@@ -519,6 +510,61 @@ NSBundle *YTWKSBundle() {
 }
 
 %new
+- (BOOL)YTWKS_layoutFullscreenDirectionSegmentWithIdentifier:(NSString *)identifier
+                                                         tag:(NSInteger)tag
+                                                     prefKey:(NSString *)prefKey
+                                                      action:(SEL)action {
+    if (![self.accessibilityIdentifier isEqualToString:identifier]) return NO;
+
+    NSBundle *bundle = YTWKSBundle();
+    NSOperatingSystemVersion ios13 = {13, 0, 0};
+    SEL tintSelector = NSSelectorFromString(@"setSelectedSegmentTintColor:");
+
+    UISegmentedControl *segment = [self.contentView viewWithTag:tag];
+    if (!segment) {
+        NSArray *items = @[
+            [bundle localizedStringForKey:@"FULLSCREEN_OFF" value:@"Off" table:nil],
+            [bundle localizedStringForKey:@"FULLSCREEN_LEFT" value:@"Left" table:nil],
+            [bundle localizedStringForKey:@"FULLSCREEN_RIGHT" value:@"Right" table:nil],
+            [bundle localizedStringForKey:@"FULLSCREEN_PORTRAIT" value:@"Portrait" table:nil]
+        ];
+        segment = [[UISegmentedControl alloc] initWithItems:items];
+        segment.tag = tag;
+        segment.selectedSegmentIndex = [defaults integerForKey:prefKey];
+        [segment addTarget:self action:action forControlEvents:UIControlEventValueChanged];
+
+        segment.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios13] &&
+            [segment respondsToSelector:tintSelector]) {
+            UIColor *tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+            ((void (*)(id, SEL, id))objc_msgSend)(segment, tintSelector, tintColor);
+        }
+        [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
+        [segment setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
+
+        UIFont *font = [UIFont systemFontOfSize:11.0 weight:UIFontWeightMedium];
+        [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
+        [segment setTitleTextAttributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
+
+        segment.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:segment];
+
+        [NSLayoutConstraint activateConstraints:@[
+            [segment.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
+            [segment.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16],
+            [segment.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-12],
+            [segment.heightAnchor constraintEqualToConstant:32]
+        ]];
+    } else {
+        NSInteger currentMode = [defaults integerForKey:prefKey];
+        if (segment.selectedSegmentIndex != currentMode) {
+            segment.selectedSegmentIndex = currentMode;
+        }
+    }
+    return YES;
+}
+
+%new
 - (void)nightModeSegmentChanged:(UISegmentedControl *)sender {
     [defaults setInteger:sender.selectedSegmentIndex forKey:@"nightMode_level"];
     [defaults synchronize];
@@ -526,8 +572,14 @@ NSBundle *YTWKSBundle() {
 }
 
 %new
-- (void)fullscreenModeSegmentChanged:(UISegmentedControl *)sender {
-    [defaults setInteger:sender.selectedSegmentIndex forKey:@"fullscreen_mode"];
+- (void)fullscreenButtonModeSegmentChanged:(UISegmentedControl *)sender {
+    [defaults setInteger:sender.selectedSegmentIndex forKey:@"fullscreen_button_mode"];
+    [defaults synchronize];
+}
+
+%new
+- (void)fullscreenSwipeModeSegmentChanged:(UISegmentedControl *)sender {
+    [defaults setInteger:sender.selectedSegmentIndex forKey:@"fullscreen_swipe_mode"];
     [defaults synchronize];
 }
 

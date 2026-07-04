@@ -2,12 +2,15 @@
 "WARNING" = "Upozornění";
 "APPLY_DESC" = "Tato akce ukončí YouTube. Opravdu chcete pokračovat?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Vynutit směr celé obrazovky";
-"FULLSCREEN_MODE_DESC" = "Vždy přejít na celou obrazovku s tlačítkem/lištou domů vlevo nebo vpravo.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Vypnuto";
 "FULLSCREEN_LEFT" = "Vlevo";
 "FULLSCREEN_RIGHT" = "Vpravo";
+"FULLSCREEN_PORTRAIT" = "Na výšku";
+"FULLSCREEN_BUTTON_MODE" = "Vynutit směr celé obrazovky (Tlačítko)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Pouze tlačítko celé obrazovky přejde do zvolené orientace. Gesta a otáčení zachovávají výchozí chování.";
+"FULLSCREEN_SWIPE_MODE" = "Vynutit směr celé obrazovky (Gesto)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Pouze gesto potažení nahoru přejde do zvolené orientace. Tlačítko celé obrazovky a otáčení zachovávají výchozí chování.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Vypnout plovoucí mini přehrávač";

@@ -2,12 +2,15 @@
 "WARNING" = "Chú ý";
 "APPLY_DESC" = "Áp dụng thay đổi này sẽ khởi động lại YouTube. Bạn có muốn tiếp tục không?";
 
-// Fullscreen Mode
-"FULLSCREEN_MODE" = "Buộc hướng toàn màn hình";
-"FULLSCREEN_MODE_DESC" = "Luôn vào chế độ toàn màn hình với nút/thanh trang chủ ở bên trái hoặc phải.";
+// Fullscreen
 "FULLSCREEN_OFF" = "Tắt";
 "FULLSCREEN_LEFT" = "Trái";
 "FULLSCREEN_RIGHT" = "Phải";
+"FULLSCREEN_PORTRAIT" = "Dọc";
+"FULLSCREEN_BUTTON_MODE" = "Buộc hướng toàn màn hình (Nút)";
+"FULLSCREEN_BUTTON_MODE_DESC" = "Chỉ nút toàn màn hình vào hướng đã chọn. Vuốt và xoay giữ hành vi mặc định.";
+"FULLSCREEN_SWIPE_MODE" = "Buộc hướng toàn màn hình (Cử chỉ)";
+"FULLSCREEN_SWIPE_MODE_DESC" = "Chỉ cử chỉ vuốt lên vào hướng đã chọn. Nút toàn màn hình và xoay giữ hành vi mặc định.";
 
 // A/B Testing Settings
 "ENABLE_IOS_FLOATING_MINIPLAYER" = "Tắt trình phát nhỏ nổi";

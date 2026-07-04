@@ -81,10 +81,6 @@ cd "$ROOT"
 echo "Building YTweaks..."
 make clean package DEBUG=0 FINALPACKAGE=1
 
-mkdir -p debs
-mv packages/*.deb "$ROOT/ytwks.deb"
-cp "$ROOT/ytwks.deb" debs/
-mv debs/ytwks.deb debs/YTweaks.deb
-rm -f "$ROOT/ytwks.deb"
+mv packages/*.deb "$ROOT/YTweaks.deb"
 
-echo "Built: $ROOT/debs/YTweaks.deb"
+echo "Built: $ROOT/YTweaks.deb"
