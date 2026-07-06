@@ -41,11 +41,13 @@
 "CANCEL" = "Batal";
 "YES" = "Ya";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Kecerahan palsu";
+"FAKE_BRIGHTNESS_DESC" = "Menurunkan kecerahan ketara di bawah minimum sistem dengan lapisan gelap. 100% adalah normal; nilai lebih rendah menggelapkan skrin.";
+
 // Night Mode
-"NIGHT_MODE" = "Mod Malam";
-"NIGHT_MODE_DESC" = "Meredupkan skrin di bawah kecerahan minimum dengan lapisan penapis gelap.";
-"NIGHT_MODE_OFF" = "Mati";
-"NIGHT_MODE_LOW" = "Rendah";
-"NIGHT_MODE_MEDIUM" = "Sederhana";
-"NIGHT_MODE_HIGH" = "Tinggi";
-"NIGHT_MODE_MAXIMUM" = "Maks";
+"SCHEDULE_NIGHT_MODE" = "Jadualkan Kecerahan Palsu (Mod Malam)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Menggunakan kecerahan palsu secara automatik semasa julat masa yang ditetapkan";
+"SCHEDULE_TIME_RANGE" = "Waktu Aktif";
+"START_TIME_LABEL" = "Dari";
+"END_TIME_LABEL" = "hingga";

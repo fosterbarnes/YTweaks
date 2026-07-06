@@ -41,11 +41,13 @@
 "CANCEL" = "Отмена";
 "YES" = "Да";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Имитация яркости";
+"FAKE_BRIGHTNESS_DESC" = "Снижает видимую яркость ниже системного минимума с помощью тёмной накладки. 100% — норма; меньшие значения затемняют экран.";
+
 // Night Mode
-"NIGHT_MODE" = "Ночной режим";
-"NIGHT_MODE_DESC" = "Затемняет экран ниже минимальной яркости с помощью тёмного фильтра.";
-"NIGHT_MODE_OFF" = "Выкл";
-"NIGHT_MODE_LOW" = "Низкий";
-"NIGHT_MODE_MEDIUM" = "Средний";
-"NIGHT_MODE_HIGH" = "Высокий";
-"NIGHT_MODE_MAXIMUM" = "Макс";
+"SCHEDULE_NIGHT_MODE" = "Расписание имитации яркости (Ночной режим)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Автоматически применять имитацию яркости в заданный промежуток времени";
+"SCHEDULE_TIME_RANGE" = "Время работы";
+"START_TIME_LABEL" = "С";
+"END_TIME_LABEL" = "до";

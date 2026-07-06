@@ -41,11 +41,13 @@
 "CANCEL" = "취소";
 "YES" = "예";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "가짜 밝기";
+"FAKE_BRIGHTNESS_DESC" = "표시 밝기를 시스템 최소값 이하로 낮춥니다";
+
 // Night Mode
-"NIGHT_MODE" = "야간 모드";
-"NIGHT_MODE_DESC" = "어두운 필터를 오버레이하여 최소 밝기 이하로 화면을 어둡게 합니다.";
-"NIGHT_MODE_OFF" = "끔";
-"NIGHT_MODE_LOW" = "낮음";
-"NIGHT_MODE_MEDIUM" = "중간";
-"NIGHT_MODE_HIGH" = "높음";
-"NIGHT_MODE_MAXIMUM" = "최대";
+"SCHEDULE_NIGHT_MODE" = "가짜 밝기 예약 (야간 모드)";
+"SCHEDULE_NIGHT_MODE_DESC" = "설정된 시간 동안 가짜 밝기를 자동으로 적용합니다";
+"SCHEDULE_TIME_RANGE" = "활성 시간";
+"START_TIME_LABEL" = "시작";
+"END_TIME_LABEL" = "종료";

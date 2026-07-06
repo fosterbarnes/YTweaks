@@ -41,11 +41,13 @@
 "CANCEL" = "Annuleren";
 "YES" = "Ja";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Nep helderheid";
+"FAKE_BRIGHTNESS_DESC" = "Verlaagt de schijnbare helderheid onder het systeemminimum met een donkere overlay. 100% is normaal; lagere waarden maken het scherm donkerder.";
+
 // Night Mode
-"NIGHT_MODE" = "Nachtmodus";
-"NIGHT_MODE_DESC" = "Dimt het scherm onder de minimale helderheid met een donker filter.";
-"NIGHT_MODE_OFF" = "Uit";
-"NIGHT_MODE_LOW" = "Laag";
-"NIGHT_MODE_MEDIUM" = "Gemiddeld";
-"NIGHT_MODE_HIGH" = "Hoog";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Nep helderheid plannen (Nachtmodus)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Past automatisch nep helderheid toe tijdens een ingesteld tijdsbereik";
+"SCHEDULE_TIME_RANGE" = "Actieve uren";
+"START_TIME_LABEL" = "Van";
+"END_TIME_LABEL" = "tot";

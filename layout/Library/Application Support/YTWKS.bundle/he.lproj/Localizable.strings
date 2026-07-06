@@ -41,11 +41,13 @@
 "CANCEL" = "ביטול";
 "YES" = "כן";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "בהירות מדומה";
+"FAKE_BRIGHTNESS_DESC" = "מוריד את הבהירות הנראית מתחת למינימום של המערכת באמצעות שכבה כהה. 100% הוא רגיל; ערכים נמוכים יותר מחשיכים את המסך.";
+
 // Night Mode
-"NIGHT_MODE" = "מצב לילה";
-"NIGHT_MODE_DESC" = "מעכה את המסך מתחת לבהירות המינימלית בשכבת פילטר כהה.";
-"NIGHT_MODE_OFF" = "כבוי";
-"NIGHT_MODE_LOW" = "נמוך";
-"NIGHT_MODE_MEDIUM" = "בינוני";
-"NIGHT_MODE_HIGH" = "גבוה";
-"NIGHT_MODE_MAXIMUM" = "מקס";
+"SCHEDULE_NIGHT_MODE" = "תזמון בהירות מדומה (מצב לילה)";
+"SCHEDULE_NIGHT_MODE_DESC" = "מחיל בהירות מדומה באופן אוטומטי במהלך טווח זמן מוגדר";
+"SCHEDULE_TIME_RANGE" = "שעות פעילות";
+"START_TIME_LABEL" = "מ-";
+"END_TIME_LABEL" = "עד";

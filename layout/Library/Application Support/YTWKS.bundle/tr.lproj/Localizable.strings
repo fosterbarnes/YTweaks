@@ -41,11 +41,13 @@
 "CANCEL" = "İptal";
 "YES" = "Evet";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Sahte parlaklık";
+"FAKE_BRIGHTNESS_DESC" = "Koyu bir katmanla görünen parlaklığı sistem minimumunun altına düşürür. %100 normaldir; daha düşük değerler ekranı karartır.";
+
 // Night Mode
-"NIGHT_MODE" = "Gece Modu";
-"NIGHT_MODE_DESC" = "Koyu bir filtre kaplayarak ekranı minimum parlaklığın altına karartır.";
-"NIGHT_MODE_OFF" = "Kapalı";
-"NIGHT_MODE_LOW" = "Düşük";
-"NIGHT_MODE_MEDIUM" = "Orta";
-"NIGHT_MODE_HIGH" = "Yüksek";
-"NIGHT_MODE_MAXIMUM" = "Maks";
+"SCHEDULE_NIGHT_MODE" = "Sahte parlaklığı planla (Gece Modu)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Belirli bir zaman aralığında sahte parlaklığı otomatik olarak uygular";
+"SCHEDULE_TIME_RANGE" = "Aktif saatler";
+"START_TIME_LABEL" = "Başlangıç";
+"END_TIME_LABEL" = "Bitiş";

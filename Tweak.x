@@ -20,8 +20,83 @@
 // Storage for original method implementations
 NSMutableDictionary <NSString *, NSMutableDictionary <NSString *, NSNumber *> *> *abConfigCache;
 
-// Night mode overlay
+// Fake brightness overlay
 static UIView *nightModeOverlay = nil;
+
+static const NSInteger YTWKSFakeBrightnessMin = 5;
+static const NSInteger YTWKSFakeBrightnessMax = 100;
+static const NSInteger YTWKSFakeBrightnessDefault = 100;
+static const NSInteger YTWKSFakeBrightnessNightDefault = 30;
+static const NSInteger YTWKSScheduleStartDefaultMinutes = 1320; // 22:00
+static const NSInteger YTWKSScheduleEndDefaultMinutes = 360;    // 06:00
+
+// Defined in Settings.x; shared here to evaluate the night-mode schedule.
+extern BOOL YTWKSMinutesInScheduleWindow(NSInteger nowMinutes, NSInteger startMinutes, NSInteger endMinutes);
+
+static void YTWKSMigrateLegacyNightModeLevel(NSUserDefaults *prefs) {
+    if ([prefs objectForKey:@"fakeBrightness_percent"]) return;
+    if (![prefs objectForKey:@"nightMode_level"]) return;
+
+    NSInteger level = [prefs integerForKey:@"nightMode_level"];
+    CGFloat opacityValues[] = {0.0, 0.3, 0.5, 0.7, 0.9};
+    NSInteger percent = YTWKSFakeBrightnessDefault;
+    if (level >= 1 && level <= 4) {
+        CGFloat opacity = opacityValues[level];
+        percent = (NSInteger)lround(100.0 - opacity * 95.0);
+        if (percent < YTWKSFakeBrightnessMin) percent = YTWKSFakeBrightnessMin;
+    }
+    [prefs setInteger:percent forKey:@"fakeBrightness_percent"];
+    [prefs removeObjectForKey:@"nightMode_level"];
+    [prefs synchronize];
+}
+
+static NSInteger YTWKSFakeBrightnessPercent(NSUserDefaults *prefs) {
+    YTWKSMigrateLegacyNightModeLevel(prefs);
+    if (![prefs objectForKey:@"fakeBrightness_percent"])
+        return YTWKSFakeBrightnessDefault;
+    NSInteger percent = [prefs integerForKey:@"fakeBrightness_percent"];
+    NSInteger clamped = percent;
+    if (clamped < YTWKSFakeBrightnessMin) clamped = YTWKSFakeBrightnessMin;
+    if (clamped > YTWKSFakeBrightnessMax) clamped = YTWKSFakeBrightnessMax;
+    if (clamped != percent) {
+        [prefs setInteger:clamped forKey:@"fakeBrightness_percent"];
+        [prefs synchronize];
+    }
+    return clamped;
+}
+
+// The percent actually applied to the overlay: the regular fakeBrightness
+// value, unless the night-mode schedule is enabled and the current time
+// falls inside the configured window, in which case the night percent wins.
+static NSInteger YTWKSEffectiveBrightnessPercent(NSUserDefaults *prefs) {
+    NSInteger dayPercent = YTWKSFakeBrightnessPercent(prefs);
+
+    if (![prefs boolForKey:@"fakeBrightness_schedule_enabled"]) return dayPercent;
+
+    NSInteger nightPercent = [prefs objectForKey:@"fakeBrightness_night_percent"]
+        ? [prefs integerForKey:@"fakeBrightness_night_percent"]
+        : YTWKSFakeBrightnessNightDefault;
+    if (nightPercent < YTWKSFakeBrightnessMin) nightPercent = YTWKSFakeBrightnessMin;
+    if (nightPercent > YTWKSFakeBrightnessMax) nightPercent = YTWKSFakeBrightnessMax;
+
+    NSInteger startMinutes = [prefs objectForKey:@"fakeBrightness_schedule_start"]
+        ? [prefs integerForKey:@"fakeBrightness_schedule_start"]
+        : YTWKSScheduleStartDefaultMinutes;
+    NSInteger endMinutes = [prefs objectForKey:@"fakeBrightness_schedule_end"]
+        ? [prefs integerForKey:@"fakeBrightness_schedule_end"]
+        : YTWKSScheduleEndDefaultMinutes;
+
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *nowComps = [cal components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
+    NSInteger nowMinutes = nowComps.hour * 60 + nowComps.minute;
+
+    return YTWKSMinutesInScheduleWindow(nowMinutes, startMinutes, endMinutes) ? nightPercent : dayPercent;
+}
+
+static CGFloat YTWKSFakeBrightnessOpacityForPercent(NSInteger percent) {
+    if (percent >= YTWKSFakeBrightnessMax) return 0.0;
+    return (100.0 - percent) / 95.0;
+}
 
 static void ensureOverlayOnMainWindow(void) {
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
@@ -42,18 +117,17 @@ static void ensureOverlayOnMainWindow(void) {
     }
 }
 
-// nightMode_level: 0 = Off, 1 = Low, 2 = Medium, 3 = High, 4 = Maximum
-static void updateNightModeOverlay(void) {
+static void updateFakeBrightnessOverlay(void) {
     if (![NSThread isMainThread]) {
-        dispatch_async(dispatch_get_main_queue(), ^{ updateNightModeOverlay(); });
+        dispatch_async(dispatch_get_main_queue(), ^{ updateFakeBrightnessOverlay(); });
         return;
     }
 
-    NSInteger level = [[NSUserDefaults standardUserDefaults] integerForKey:@"nightMode_level"];
-    CGFloat opacityValues[] = {0.0, 0.3, 0.5, 0.7, 0.9};
-    CGFloat opacity = (level >= 0 && level <= 4) ? opacityValues[level] : 0.0;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSInteger percent = YTWKSEffectiveBrightnessPercent(prefs);
+    CGFloat opacity = YTWKSFakeBrightnessOpacityForPercent(percent);
 
-    if (level > 0) {
+    if (percent < YTWKSFakeBrightnessMax && opacity > 0.0) {
         ensureOverlayOnMainWindow();
         if (nightModeOverlay) {
             nightModeOverlay.hidden = NO;
@@ -180,13 +254,24 @@ static void hookClass(NSObject *instance) {
     hookClass(coldConfig);
     hookClass(hotConfig);
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"YTWKSNightModeChanged"
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"YTWKSFakeBrightnessChanged"
         object:nil queue:[NSOperationQueue mainQueue]
-        usingBlock:^(NSNotification *note) { updateNightModeOverlay(); }];
+        usingBlock:^(NSNotification *note) { updateFakeBrightnessOverlay(); }];
+
+    // Re-evaluate on foreground and every 60s so a schedule boundary (e.g.
+    // 22:00 arriving) is caught even if no setting was touched and the app
+    // was just sitting open/backgrounded.
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification
+        object:nil queue:[NSOperationQueue mainQueue]
+        usingBlock:^(NSNotification *note) { updateFakeBrightnessOverlay(); }];
+
+    [NSTimer scheduledTimerWithTimeInterval:60.0
+        repeats:YES
+        block:^(NSTimer *timer) { updateFakeBrightnessOverlay(); }];
 
     // 3 second delay before applying setting on fresh launch
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)),
-        dispatch_get_main_queue(), ^{ updateNightModeOverlay(); });
+        dispatch_get_main_queue(), ^{ updateFakeBrightnessOverlay(); });
     
     return result;
 }
@@ -520,6 +605,7 @@ static void hideAISummaryViewsInCell(UIView *cell) {
     abConfigCache = [NSMutableDictionary new];
 
     YTWKSMigrateLegacyFullscreenMode();
+    YTWKSMigrateLegacyNightModeLevel([NSUserDefaults standardUserDefaults]);
     
     %init;
 }

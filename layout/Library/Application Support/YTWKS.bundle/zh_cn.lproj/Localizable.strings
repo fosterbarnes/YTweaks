@@ -41,11 +41,13 @@
 "CANCEL" = "取消";
 "YES" = "是";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "模拟亮度";
+"FAKE_BRIGHTNESS_DESC" = "将表观亮度降低到系统最低亮度以下";
+
 // Night Mode
-"NIGHT_MODE" = "夜间模式";
-"NIGHT_MODE_DESC" = "通过叠加深色滤镜将屏幕亮度降低到最低亮度以下。";
-"NIGHT_MODE_OFF" = "关";
-"NIGHT_MODE_LOW" = "低";
-"NIGHT_MODE_MEDIUM" = "中";
-"NIGHT_MODE_HIGH" = "高";
-"NIGHT_MODE_MAXIMUM" = "最高";
+"SCHEDULE_NIGHT_MODE" = "定时模拟亮度 (夜间模式)";
+"SCHEDULE_NIGHT_MODE_DESC" = "在设定时间段内自动启用模拟亮度";
+"SCHEDULE_TIME_RANGE" = "生效时间";
+"START_TIME_LABEL" = "从";
+"END_TIME_LABEL" = "至";

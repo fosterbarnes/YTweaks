@@ -41,11 +41,13 @@
 "CANCEL" = "Mégse";
 "YES" = "Igen";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Hamis fényerő";
+"FAKE_BRIGHTNESS_DESC" = "Sötét réteggel a látszó fényerőt a rendszer minimuma alá csökkenti. 100% a normál; az alacsonyabb értékek sötétítik a képernyőt.";
+
 // Night Mode
-"NIGHT_MODE" = "Éjszakai mód";
-"NIGHT_MODE_DESC" = "Sötét szűrő rétegezésével csökkenti a képernyő fényerejét a minimum alá.";
-"NIGHT_MODE_OFF" = "Ki";
-"NIGHT_MODE_LOW" = "Alacsony";
-"NIGHT_MODE_MEDIUM" = "Közepes";
-"NIGHT_MODE_HIGH" = "Magas";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Hamis fényerő ütemezése (Éjszakai mód)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Automatikusan alkalmazza a hamis fényerőt a beállított időtartományban";
+"SCHEDULE_TIME_RANGE" = "Aktív órák";
+"START_TIME_LABEL" = "Kezdet";
+"END_TIME_LABEL" = "eddig";

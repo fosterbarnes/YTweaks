@@ -41,11 +41,13 @@
 "CANCEL" = "रद्द करें";
 "YES" = "हाँ";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "नकली चमक";
+"FAKE_BRIGHTNESS_DESC" = "गहरे ओवरले से दिखने वाली चमक को सिस्टम न्यूनतम से नीचे करता है। 100% सामान्य है; कम मान स्क्रीन को और अंधेरा करते हैं।";
+
 // Night Mode
-"NIGHT_MODE" = "नाइट मोड";
-"NIGHT_MODE_DESC" = "गहरे फ़िल्टर से स्क्रीन को न्यूनतम चमक से नीचे कम करता है।";
-"NIGHT_MODE_OFF" = "बंद";
-"NIGHT_MODE_LOW" = "कम";
-"NIGHT_MODE_MEDIUM" = "मध्यम";
-"NIGHT_MODE_HIGH" = "उच्च";
-"NIGHT_MODE_MAXIMUM" = "अधिकतम";
+"SCHEDULE_NIGHT_MODE" = "नकली चमक शेड्यूल करें (नाइट मोड)";
+"SCHEDULE_NIGHT_MODE_DESC" = "एक निश्चित समय सीमा के दौरान स्वचालित रूप से नकली चमक लागू करता है";
+"SCHEDULE_TIME_RANGE" = "सक्रिय घंटे";
+"START_TIME_LABEL" = "से";
+"END_TIME_LABEL" = "तक";

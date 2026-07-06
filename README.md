@@ -3,11 +3,12 @@
 Working features:
 - **Force Fullscreen Direction (Button)**: Choose Off, Left, Right, or Portrait for the fullscreen button.
 - **Force Fullscreen Direction (Gesture)**: Choose Off, Left, Right, or Portrait for the swipe-up gesture. Independent of the button setting.
-- **Night Mode**: Lowers brightness below device minimum by "faking it" with an app-wide semi-transparent black overlay. Works best on OLED devices.
 - **Disable floating miniplayer**: Restores the old miniplayer by disabling the floating miniplayer.
 - **Virtual fullscreen bezels**: Adds invisible touch-safe zones on black bars to prevent accidental taps and skips.
 - **Fix Casting** - Attempts to fix casting by changing some A/B flags. Only works on v20.10.4 or lower.
 - **Hide AI Summaries**: Attempts to block/hide AI summaries below videos in the home feed.
+- **Fake Brightness**: Lowers apparent brightness below the system minimum. Works best on OLED devices.
+- **Schedule Fake Brightness (Night Mode)**: Automatically applies fake brightness during a set time range.
 
 More settings will most likely be added in the future. Designed to work with a [fork of YTLite](https://github.com/fosterbarnes/YTPlusYTweaks/) (also known as [YouTube Plus](https://github.com/dayanch96/YTLite)).
 
@@ -32,3 +33,5 @@ Refer to [YTPlusYTweaks](https://github.com/fosterbarnes/YTPlusYTweaks#how-to-bu
 ## Special Thanks
 
 Thanks to PoomSmart for making the various tweaks that made this possible. This tweak is essentially a stripped down fork of https://github.com/PoomSmart/YTABConfig
+
+Shoutout https://github.com/pwnless/AutoFLEX. This tool has been crucial for debugging and testing.

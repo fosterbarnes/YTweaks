@@ -41,11 +41,13 @@
 "CANCEL" = "Kanselahin";
 "YES" = "Oo";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Fake Brightness";
+"FAKE_BRIGHTNESS_DESC" = "Pinapababa ang tila brightness sa ibaba ng system minimum gamit ang dark overlay. 100% ang normal; mas madilim ang screen kapag mas mababa ang value.";
+
 // Night Mode
-"NIGHT_MODE" = "Night Mode";
-"NIGHT_MODE_DESC" = "Pinapadilim ang screen sa ibaba ng minimum brightness gamit ang dark filter.";
-"NIGHT_MODE_OFF" = "Off";
-"NIGHT_MODE_LOW" = "Mababa";
-"NIGHT_MODE_MEDIUM" = "Katamtaman";
-"NIGHT_MODE_HIGH" = "Mataas";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "I-schedule ang Fake Brightness (Night Mode)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Awtomatikong nilalapat ang fake brightness sa loob ng itinakdang oras";
+"SCHEDULE_TIME_RANGE" = "Mga Aktibong Oras";
+"START_TIME_LABEL" = "Mula";
+"END_TIME_LABEL" = "hanggang";

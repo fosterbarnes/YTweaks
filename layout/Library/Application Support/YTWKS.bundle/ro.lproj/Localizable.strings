@@ -41,11 +41,13 @@
 "CANCEL" = "Anulează";
 "YES" = "Da";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Luminozitate simulată";
+"FAKE_BRIGHTNESS_DESC" = "Reduce luminozitatea aparentă sub minimul sistemului cu un strat întunecat. 100% este normal; valori mai mici întunecă ecranul.";
+
 // Night Mode
-"NIGHT_MODE" = "Mod Noapte";
-"NIGHT_MODE_DESC" = "Întunecă ecranul sub luminozitatea minimă prin suprapunerea unui filtru întunecat.";
-"NIGHT_MODE_OFF" = "Oprit";
-"NIGHT_MODE_LOW" = "Scăzut";
-"NIGHT_MODE_MEDIUM" = "Mediu";
-"NIGHT_MODE_HIGH" = "Ridicat";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Programare luminozitate simulată (Mod Noapte)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Aplică automat luminozitatea simulată într-un interval de timp setat";
+"SCHEDULE_TIME_RANGE" = "Ore active";
+"START_TIME_LABEL" = "De la";
+"END_TIME_LABEL" = "la";

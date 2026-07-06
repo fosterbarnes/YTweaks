@@ -41,11 +41,13 @@
 "CANCEL" = "ยกเลิก";
 "YES" = "ใช่";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "ความสว่างจำลอง";
+"FAKE_BRIGHTNESS_DESC" = "ลดความสว่างที่เห็นต่ำกว่าค่าขั้นต่ำของระบบด้วยเลเยอร์มืด 100% คือปกติ ค่าที่ต่ำลงจะทำให้หน้าจอมืดลง";
+
 // Night Mode
-"NIGHT_MODE" = "โหมดกลางคืน";
-"NIGHT_MODE_DESC" = "ลดความสว่างหน้าจอให้ต่ำกว่าความสว่างขั้นต่ำโดยการซ้อนทับฟิลเตอร์มืด";
-"NIGHT_MODE_OFF" = "ปิด";
-"NIGHT_MODE_LOW" = "ต่ำ";
-"NIGHT_MODE_MEDIUM" = "กลาง";
-"NIGHT_MODE_HIGH" = "สูง";
-"NIGHT_MODE_MAXIMUM" = "สูงสุด";
+"SCHEDULE_NIGHT_MODE" = "กำหนดเวลาความสว่างจำลอง (โหมดกลางคืน)";
+"SCHEDULE_NIGHT_MODE_DESC" = "ใช้ความสว่างจำลองโดยอัตโนมัติในช่วงเวลาที่กำหนด";
+"SCHEDULE_TIME_RANGE" = "เวลาเปิดใช้งาน";
+"START_TIME_LABEL" = "จาก";
+"END_TIME_LABEL" = "ถึง";

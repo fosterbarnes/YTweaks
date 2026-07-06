@@ -41,11 +41,13 @@
 "CANCEL" = "Cancelar";
 "YES" = "Sí";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Brillo simulado";
+"FAKE_BRIGHTNESS_DESC" = "Reduce el brillo aparente por debajo del mínimo del sistema";
+
 // Night Mode
-"NIGHT_MODE" = "Modo nocturno";
-"NIGHT_MODE_DESC" = "Oscurece la pantalla por debajo del brillo mínimo superponiendo un filtro oscuro.";
-"NIGHT_MODE_OFF" = "No";
-"NIGHT_MODE_LOW" = "Bajo";
-"NIGHT_MODE_MEDIUM" = "Medio";
-"NIGHT_MODE_HIGH" = "Alto";
-"NIGHT_MODE_MAXIMUM" = "Máx";
+"SCHEDULE_NIGHT_MODE" = "Programar brillo simulado (Modo nocturno)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Aplica automáticamente el brillo simulado durante un intervalo de tempo establecido";
+"SCHEDULE_TIME_RANGE" = "Horas activas";
+"START_TIME_LABEL" = "Desde";
+"END_TIME_LABEL" = "hasta";

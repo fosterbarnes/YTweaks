@@ -41,11 +41,13 @@
 "CANCEL" = "Cancel";
 "YES" = "Yes";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Fake Brightness";
+"FAKE_BRIGHTNESS_DESC" = "Lowers apparent brightness below the system minimum";
+
 // Night Mode
-"NIGHT_MODE" = "Night Mode";
-"NIGHT_MODE_DESC" = "Dims the screen below minimum brightness by overlaying a dark filter.";
-"NIGHT_MODE_OFF" = "Off";
-"NIGHT_MODE_LOW" = "Low";
-"NIGHT_MODE_MEDIUM" = "Medium";
-"NIGHT_MODE_HIGH" = "High";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Schedule Fake Brightness (Night Mode)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Automatically applies fake brightness during a set time range";
+"SCHEDULE_TIME_RANGE" = "Active Hours";
+"START_TIME_LABEL" = "From";
+"END_TIME_LABEL" = "to";

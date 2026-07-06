@@ -41,11 +41,13 @@
 "CANCEL" = "Avbryt";
 "YES" = "Ja";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Falsk ljusstyrka";
+"FAKE_BRIGHTNESS_DESC" = "Sänker den skenbara ljusstyrkan under systemminimum med ett mörkt lager. 100 % är normalt; lägre värden gör skärmen mörkare.";
+
 // Night Mode
-"NIGHT_MODE" = "Nattläge";
-"NIGHT_MODE_DESC" = "Dämpar skärmen under minsta ljusstyrka med ett mörkt filter.";
-"NIGHT_MODE_OFF" = "Av";
-"NIGHT_MODE_LOW" = "Låg";
-"NIGHT_MODE_MEDIUM" = "Medium";
-"NIGHT_MODE_HIGH" = "Hög";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Schemalägg falsk ljusstyrka (Nattläge)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Tillämpar automatiskt falsk ljusstyrka under ett angivet tidsintervall";
+"SCHEDULE_TIME_RANGE" = "Aktiva timmar";
+"START_TIME_LABEL" = "Från";
+"END_TIME_LABEL" = "till";

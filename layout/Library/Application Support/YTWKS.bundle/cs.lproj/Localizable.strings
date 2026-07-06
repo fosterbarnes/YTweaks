@@ -41,11 +41,13 @@
 "CANCEL" = "Zrušit";
 "YES" = "Ano";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "Falešný jas";
+"FAKE_BRIGHTNESS_DESC" = "Sníží zdánlivý jas pod systémové minimum pomocí tmavé vrstvy. 100 % je normální; nižší hodnoty obrazovku ztmaví.";
+
 // Night Mode
-"NIGHT_MODE" = "Noční režim";
-"NIGHT_MODE_DESC" = "Ztlumí obrazovku pod minimální jas překrytím tmavého filtru.";
-"NIGHT_MODE_OFF" = "Vypnuto";
-"NIGHT_MODE_LOW" = "Nízká";
-"NIGHT_MODE_MEDIUM" = "Střední";
-"NIGHT_MODE_HIGH" = "Vysoká";
-"NIGHT_MODE_MAXIMUM" = "Max";
+"SCHEDULE_NIGHT_MODE" = "Naplánovat falešný jas (Noční režim)";
+"SCHEDULE_NIGHT_MODE_DESC" = "Automaticky použije falešný jas během nastaveného časového rozmezí";
+"SCHEDULE_TIME_RANGE" = "Aktivní hodiny";
+"START_TIME_LABEL" = "Od";
+"END_TIME_LABEL" = "do";

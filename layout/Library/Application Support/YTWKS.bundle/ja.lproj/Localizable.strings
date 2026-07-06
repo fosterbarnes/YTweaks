@@ -41,11 +41,13 @@
 "CANCEL" = "キャンセル";
 "YES" = "はい";
 
+// Fake Brightness
+"FAKE_BRIGHTNESS" = "偽の輝度";
+"FAKE_BRIGHTNESS_DESC" = "見かけの輝度をシステム最小値以下に下げます";
+
 // Night Mode
-"NIGHT_MODE" = "ナイトモード";
-"NIGHT_MODE_DESC" = "暗いフィルターを重ねて、最小輝度以下に画面を暗くします。";
-"NIGHT_MODE_OFF" = "オフ";
-"NIGHT_MODE_LOW" = "低";
-"NIGHT_MODE_MEDIUM" = "中";
-"NIGHT_MODE_HIGH" = "高";
-"NIGHT_MODE_MAXIMUM" = "最大";
+"SCHEDULE_NIGHT_MODE" = "偽の輝度をスケジュール (ナイトモード)";
+"SCHEDULE_NIGHT_MODE_DESC" = "設定された時間帯に偽の輝度を自動的に適用します";
+"SCHEDULE_TIME_RANGE" = "アクティブ時間";
+"START_TIME_LABEL" = "開始";
+"END_TIME_LABEL" = "終了";
